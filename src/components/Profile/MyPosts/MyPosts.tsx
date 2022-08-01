@@ -1,14 +1,17 @@
 import React from 'react';
 import s from './MyPosts.module.css';
 import Post, {PostPropsType} from './Post/Post';
+import {ActionTypes, addPostActionCreator, updateNewPostTextActionCreator} from "../../../redux/state";
 
 
 export type MyPostsPropsType = {
     posts: Array<PostPropsType>
-    addPost:(/*postMessage:string*/)=> void
+    /*addPost:(/!*postMessage:string*!/)=> void*/
     newPostText:string
-    updateNewPostText:(newText:string)=> void
+/*    updateNewPostText:(newText:string)=> void*/
+    dispatch: (action: ActionTypes) => void
 }
+
 
 
 const MyPosts = (props: MyPostsPropsType) => {
@@ -27,19 +30,28 @@ const MyPosts = (props: MyPostsPropsType) => {
         }*/
 
         /*let text = newPostElement.current?.value;*/
-        if (newPostElement.current) {
-            /*let text = newPostElement.current.value*/
+      /*  if (newPostElement.current) {
+            /!*let text = newPostElement.current.value*!/
             props.addPost()
 
-        }
+        }*/
+        props.dispatch(addPostActionCreator(props.newPostText))
+
 
     }
 
     const onPostChange = () => {
-        if (newPostElement.current) {
-        let text = newPostElement.current.value
-        props.updateNewPostText(text) }
-    }
+        /*if (newPostElement.current) {
+        let text = newPostElement.current.value;
+        props.dispatch({type:'UPDATE-NEW-POST-TEXT',newText:text}) }*/
+        if (newPostElement.current){
+        let text = newPostElement.current.value;
+        let action = updateNewPostTextActionCreator(text);
+            props.dispatch(action)
+    }}
+
+
+
 
     return (
         <div className={s.postsBlock}>
