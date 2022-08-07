@@ -8,7 +8,7 @@ import {
     sendMessageCreator,
     StoreType,
     updateNewMessageBodyCreator
-} from "../../redux/state";
+} from "../../redux/store";
 
 export type DialogsPropsType = {
     /*state:{
@@ -17,19 +17,27 @@ export type DialogsPropsType = {
         newMessageBody:string
         dispatch : (action:ActionTypes) => void
     }*/
-    store: StoreType
+   /* store: StoreType
+    dialogsPage: DialogPageType*/
+    updateNewMessageBody: (body: string) => void
+    sendMessage: () => void
     dialogsPage: DialogPageType
+
 }
 
 const Dialogs = (props: DialogsPropsType) => {
-    let state = props.store.getState().dialogsPage;
+
+    let state = props.dialogsPage
+
     let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
     let messagesElements = state.messages.map(m => <Message message={m.message}/>);
-    let newMessageBody = props.dialogsPage.newMassageBody //props.dialogsPage.newMessageBody
-    let onSendMessageClick = () => props.store.dispatch(sendMessageCreator());
+    let newMessageBody = props.dialogsPage.newMassageBody
+
+    let onSendMessageClick = () => props.sendMessage();
+
     let onNEwMessageChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
         let body = e.target.value;
-        props.store.dispatch(updateNewMessageBodyCreator(body))
+        props.updateNewMessageBody(body)
     }
 
     return (

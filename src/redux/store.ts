@@ -35,23 +35,6 @@ export type RootStateType = {
 }
 
 
-/*let rerenderEntireTree = () => {
-}*/
-
-/*export const subscribe = (observer: ()=> void) =>{
-    rerenderEntireTree = observer
-}*/
-
-/*export let addPost = (/!*postMessage:string*!/) => {
-    let newPost: PostType = {
-        id:5,
-        message: state.profilePage.newPostText /!*postMessage*!/,
-        likesCount:0
-    }
-    state.profilePage.posts.push(newPost)
-    state.profilePage.newPostText = ('')
-    rerenderEntireTree()
-}*/
 
 export type StoreType = {
     _state: RootStateType
@@ -61,18 +44,6 @@ export type StoreType = {
     dispatch: (action: ActionTypes) => void
 }
 
-/*type AddPostActionType = {
-    type:'ADD_POST'
-    newPostText: string
-}*/
-
-/*type UpdateNewPostTextType = {
-    type:'UPDATE-NEW-POST-TEXT'
-    newText: string
-}*/
-
-/*type AddPostActionType = ReturnType<typeof addPostActionCreator>
-type UpdateNewPostTextType = ReturnType<typeof updateNewPostTextActionCreator>*/
 
 
 export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> |
@@ -152,74 +123,9 @@ let store: StoreType = {
         this._callSubscriber(this._state)
 
 
-        /* if (action.type === 'ADD_POST'){
-                  let newPost: PostType = {
-                      id:5,
-                      message: action.newPostText /!*this._state.profilePage.newPostText*!/ /!*postMessage*!/,
-                      likesCount:0
-                  }
-                  this._state.profilePage.posts.push(newPost)
-                  this._state.profilePage.newPostText = ('')
-                  this._callSubscriber()
-               }
-
-          else if (action.type ==='UPDATE-NEW-POST-TEXT'){
-                  this._state.profilePage.newPostText = action.newText
-                  this._callSubscriber()
-          }*/
-
-        /* else if (action.type === 'UPDATE-NEW-MESSAGE-BODY'){
-             this._state.dialogsPage.newMassageBody = action.body;
-             this._callSubscriber()
-        }
-
-         else if(action.type === 'SEND-MESSAGE'){
-             let body = this._state.dialogsPage.newMassageBody;
-            this._state.dialogsPage.newMassageBody = '';
-            this._state.dialogsPage.messages.push(
-                {id:6,message: body}
-            );
- */
-
     }
 }
 
 
-/*let state:RootStateType = {
-    profilePage: {
-        posts: [
-            {id: 1, message: 'Hi, how are you?', likesCount: 12},
-            {id: 2, message: 'It\'s my first post', likesCount: 11},
-            {id: 3, message: 'Blabla', likesCount: 11},
-            {id: 4, message: 'Dada', likesCount: 11}
-        ],
-        newPostText: 'it-kamasutra.com'
-    },
-    dialogsPage: {
-        dialogs: [
-            {id: 1, name: 'Dimych'},
-            {id: 2, name: 'Andrew'},
-            {id: 3, name: 'Sveta'},
-            {id: 4, name: 'Sasha'},
-            {id: 5, name: 'Viktor'},
-            {id: 6, name: 'Valera'}
-        ],
-        messages: [
-            {id: 1, message: 'Hi'},
-            {id: 2, message: 'How is your it-kamasutra?'},
-            {id: 3, message: 'Yo'},
-            {id: 4, message: 'Yo'},
-            {id: 5, message: 'Yo'}
-        ]
-    },
-    sidebar: {}
-}*/
-
-/*export let updateNewPostText = (newText:string)=>{
-    state.profilePage.newPostText = newText;
-    rerenderEntireTree()
-}*/
-
 
 export default store;
-//window.store = store;
