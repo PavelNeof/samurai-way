@@ -35,7 +35,6 @@ export type RootStateType = {
 }
 
 
-
 export type StoreType = {
     _state: RootStateType
     _callSubscriber: (state: RootStateType) => void
@@ -45,9 +44,12 @@ export type StoreType = {
 }
 
 
-
-export type ActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> |
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator> | ReturnType<typeof updateNewPostTextActionCreator> |
     ReturnType<typeof updateNewMessageBodyCreator> | ReturnType<typeof sendMessageCreator>
+
+
+
 
 export const addPostActionCreator = (newPostText: string) => {
     return {
@@ -105,7 +107,8 @@ let store: StoreType = {
             ],
             newMassageBody: '',
         },
-        sidebar: {}
+        sidebar: {},
+
     },
     getState() {
         return this._state
@@ -125,7 +128,6 @@ let store: StoreType = {
 
     }
 }
-
 
 
 export default store;

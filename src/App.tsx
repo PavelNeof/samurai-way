@@ -7,6 +7,7 @@ import Dialogs from "./components/Dialogs/Dialogs";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import state, {ActionTypes, DialogPageType, RootStateType, StoreType} from "./redux/store";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 
 type AppStateType = {
@@ -32,8 +33,9 @@ const App = () => {
                     <Route path='/dialogs'
                            element={<DialogsContainer/>}/>
                     <Route path='/profile'
-                           element={
-                               <Profile/>}/>
+                           element={<Profile/>}/>
+                    <Route path={'/users'}
+                           element={<UsersContainer/>}/>
                 </Routes>
             </div>
 
