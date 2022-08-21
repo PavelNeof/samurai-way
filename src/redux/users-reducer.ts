@@ -6,15 +6,15 @@ export type initialStateType = {
 }
 
 export type initialStateUsersType = {
+    name: string
     id: number
+    uniqueUrlName: string,
+    photos: {
+        small: string,
+        large: string
+    },
+    status: boolean,
     followed: boolean
-    fullName: string
-    status: string
-    photoUrl: string
-    location: {
-        country: string
-        city: string
-    }
 }
 
 
