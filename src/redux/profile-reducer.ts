@@ -33,7 +33,7 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case "ADD_POST":
             let newPost: PostType = {
                 id: 5,
-                message: state.newPostText /*this._state.profilePage.newPostText*/ /*postMessage*/,
+                message: state.newPostText ,
                 likesCount: 0
             }
             return {...state, posts: [...state.posts, newPost], newPostText: ''}

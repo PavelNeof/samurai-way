@@ -4,6 +4,7 @@ import MyPosts, {MyPostsPropsType} from './MyPosts/MyPosts';
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ActionTypes, StoreType} from '../../redux/store';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
+import {ProfileMapStateToProps} from "./ProfileContainer";
 
 type ProfilePropsType = {
    // ProfilePage: ProfilePageType
@@ -13,7 +14,7 @@ type ProfilePropsType = {
   //  store: StoreType
 }
 
-const Profile = (props: any) => {
+const Profile = (props: ProfileMapStateToProps) => {
 
 
     return (

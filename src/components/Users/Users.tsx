@@ -1,10 +1,7 @@
 import React from "react";
 import {initialStateType, initialStateUsersType} from "../../redux/users-reducer";
 import styles from "./Users.module.css"
-import {AllUsersType} from "./UsersContainer";
-import axios from "axios";
 import userPhoto from '../../assets/images/user.jpg'
-import {AppStateType} from "../../redux/redux-store";
 import {NavLink} from "react-router-dom";
 
 
@@ -30,7 +27,7 @@ let Users = (props: UsersType) => {
     return <div>
         <div>
             {pages.map(p => {
-                return <span className={/*this.props.currentPage===p && */styles.selectedPage}
+                return <span className={props.currentPage===p ? styles.selectedPage:''}
                              onClick={(e) => {
                                  props.onPageChanged(p)
                              }}>{p + ' '}</span>
@@ -40,7 +37,7 @@ let Users = (props: UsersType) => {
                 <span key={u.id}>
             <span>
                 <div>
-                    <NavLink to={'/propfile' + u.id}>
+                    <NavLink to={'/profile/' + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                     </NavLink>
                 </div>
