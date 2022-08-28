@@ -4,30 +4,23 @@ import styles from "./Users.module.css"
 import {AllUsersType} from "./UsersContainer";
 import axios from "axios";
 import userPhoto from '../../assets/images/user.jpg'
+import {AppStateType} from "../../redux/redux-store";
 
 
-class Users extends React.Component<AllUsersType> {
+type UsersType = {
+    totalUsersCount: number
+    pageSize: number
+    currentPage:number
+    onPageChanged: (pageNumber: number)=> void
+    follow:(userID:number)=>void
+    unfollow:(userID:number)=>void
+    users: Array<initialStateUsersType>
+}
 
-    componentDidMount() {
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${this.props.currentPage}&count=${this.props.pagesSize}`).then(
-            response => {
-                this.props.setUsers(response.data.items)
-                this.props.setTotalUsersCount(response.data.totalCount)
-            }
-        );
-    }
+let Users = (props: UsersType) => {
 
-    onPageChanged = (pageNumber: number) => {
-        this.props.setCurrentPage(pageNumber);
-        axios.get(`https://social-network.samuraijs.com/api/1.0/users?page=${pageNumber}&count=${this.props.pagesSize}`).then(
-            response => {
-                this.props.setUsers(response.data.items)
-            }
-        );
-    }
 
-    render() {
-        let pagesCount = Math.ceil(this.props.totalUsersCount / this.props.pagesSize);
+        let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
         let pages = [];
         for (let i = 1; i <= pagesCount; i++) {
             pages.push(i)
@@ -38,11 +31,11 @@ class Users extends React.Component<AllUsersType> {
                 {pages.map(p => {
                     return <span className={/*this.props.currentPage===p && */styles.selectedPage}
                                  onClick={(e) => {
-                                     this.onPageChanged(p)
+                                     props.onPageChanged(p)
                                  }}>{p}</span>
                 })}
             </div>
-            {this.props.users.map((u: initialStateUsersType) =>
+            {props.users.map((u: initialStateUsersType) =>
                     <span key={u.id}>
             <span>
                 <div>
@@ -52,10 +45,10 @@ class Users extends React.Component<AllUsersType> {
 <div>
 {u.followed
     ? <button onClick={() => {
-        this.props.unfollow(u.id)
+       props.unfollow(u.id)
     }}> Unfollow </button>
     : <button onClick={() => {
-        this.props.follow(u.id)
+       props.follow(u.id)
     }}> Follow </button>
 }
 </div>
@@ -75,7 +68,7 @@ class Users extends React.Component<AllUsersType> {
         </div>
     }
 
-}
+
 
 export default Users;
 
