@@ -1,5 +1,5 @@
 import React from "react";
-import {initialStateType, initialStateUsersType} from "../../redux/users-reducer";
+import {initialStateType, initialStateUsersType, toggleFollowingProgress} from "../../redux/users-reducer";
 import styles from "./Users.module.css"
 import userPhoto from '../../assets/images/user.jpg'
 import {NavLink} from "react-router-dom";
@@ -14,10 +14,11 @@ type UsersType = {
     follow: (userID: number) => void
     unfollow: (userID: number) => void
     users: Array<initialStateUsersType>
+    toggleFollowingProgress:(isFetching: boolean, userId:number) => void
+    followingInProgress:Array<number>
 }
 
 let Users = (props: UsersType) => {
-
 
     let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
     let pages = [];
@@ -44,8 +45,8 @@ let Users = (props: UsersType) => {
                 </div>
                 <div>
 {u.followed
-    ? <button onClick={() => {
-
+    ? <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+        props.toggleFollowingProgress(true,u.id)
         axios.delete(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{
             withCredentials: true,
             headers: {
@@ -56,12 +57,13 @@ let Users = (props: UsersType) => {
                 if (response.data.resultCode === 0) {
                     props.unfollow(u.id)
                 }
+                props.toggleFollowingProgress(false,u.id)
             })
 
 
     }}> Unfollow </button>
-    : <button onClick={() => {
-
+    : <button disabled={props.followingInProgress.some(id=>id===u.id)} onClick={() => {
+        props.toggleFollowingProgress(true,u.id)
         axios.post(`https://social-network.samuraijs.com/api/1.0/follow/${u.id}`, {},{
             withCredentials: true,
             headers: {
@@ -71,6 +73,7 @@ let Users = (props: UsersType) => {
             .then(response => {
                 if (response.data.resultCode === 0) {
                    props.follow(u.id)
+                    props.toggleFollowingProgress(false,u.id)
                 }
             })
 
