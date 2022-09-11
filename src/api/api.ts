@@ -6,11 +6,11 @@ type getUsersType = {
         items: initialStateUsersType[];
         totalCount: number
 }
-type usersAPIType = {
+/*type usersAPIType = {
     getUsers(currentPage: number, pageSize: number): void;
     unfollow(useId: number): getUsersType
     follow(useId: number): getUsersType
-}
+}*/
 
 
 export const usersAPI = {
@@ -18,12 +18,24 @@ export const usersAPI = {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
     },
     unfollow(userId: number) {
-        return instance.delete(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.delete(`follow/${userId}`)
     },
     follow(userId: number) {
-        return instance.post(`https://social-network.samuraijs.com/api/1.0/follow/${userId}`)
+        return instance.post(`follow/${userId}`)
+    },
+    getProfile(userId:number){
+        return instance.get(`profile/`+userId)
     }
 }
+export const authAPI = {
+    me(){
+        return  instance.get(`auth/me`)
+    }
+}
+
+
+
+
 
 /*const getUsers = (currentPage: number = 1, pageSize: number = 10): getUsersType => {
     return instance.get(`users?page=${currentPage}&count=${pageSize}`)

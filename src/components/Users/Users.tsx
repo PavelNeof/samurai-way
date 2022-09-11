@@ -28,8 +28,8 @@ console.log(props.followingInProgress)
 
     return <div>
         <div>
-            {pages.map(p => {
-                return <span className={props.currentPage === p ? styles.selectedPage : ''}
+            {pages.map((p,index) => {
+                return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}
                              onClick={(e) => {
                                  props.onPageChanged(p)
                              }}>{p + ' '}</span>

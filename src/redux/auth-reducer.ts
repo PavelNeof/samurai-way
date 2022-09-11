@@ -1,5 +1,9 @@
 import React from "react";
 import {ActionTypes, DialogPageType} from "./store";
+import axios from "axios";
+import {Dispatch} from "redux";
+import {UsersActionTypes} from "./users-reducer";
+import {authAPI} from "../api/api";
 
 export type initialStateType = {
     usersId: number | null
@@ -15,7 +19,7 @@ type DataAuthType = {
     login: string
 }
 
-export type UsersActionTypes = ReturnType<typeof setAuthUserData>
+export type AuthActionTypes = ReturnType<typeof setAuthUserData>
 
 let initialState: initialStateType = {
     usersId: null,
@@ -26,7 +30,7 @@ let initialState: initialStateType = {
 }
 
 
-export const authReducer = (state: initialStateType = initialState, action: UsersActionTypes): initialStateType => {
+export const authReducer = (state: initialStateType = initialState, action: AuthActionTypes): initialStateType => {
     switch (action.type) {
         case 'SET_USER_DATA':
             return {
@@ -41,7 +45,17 @@ export const authReducer = (state: initialStateType = initialState, action: User
 
 };
 
-
+export const getAuthUserData = () =>
+    (dispatch:Dispatch<AuthActionTypes>) => {
+      authAPI.me()
+    .then(
+            response => {
+                if (response.data.resultCode === 0) {
+                    let {id, login, email} = response.data.data
+                    dispatch(setAuthUserData(id, email, login))
+                }
+            })
+    }
 export const setAuthUserData = (usersId:number,email: string, login: string) => ({
     type: 'SET_USER_DATA', data: {usersId, email, login}
 } as const)

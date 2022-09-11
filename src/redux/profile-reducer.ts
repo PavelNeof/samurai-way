@@ -1,6 +1,7 @@
 
 import profile from "../components/Profile/Profile";
-import {followSuccess} from "./users-reducer";
+import {Dispatch} from "redux";
+import {usersAPI} from "../api/api";
 
 let initialState = {
     posts: [
@@ -44,6 +45,13 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         default:
             return state
     }
+}
+
+
+export const getUserProfile = (userId:number) => (dispatch:Dispatch<ProfileActionTypes>) =>{
+    usersAPI.getProfile(userId).then(response => {
+        dispatch(setUserProfile(response.data))
+    })
 }
 
 export const updateNewPostTextActionCreator = (text: string) => {
