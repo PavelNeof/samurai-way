@@ -5,6 +5,7 @@ import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import {ActionTypes, StoreType} from '../../redux/store';
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import {ProfileMapStateToProps} from "./ProfileContainer";
+import {Navigate} from "react-router-dom";
 
 type ProfilePropsType = {
    // ProfilePage: ProfilePageType
@@ -16,7 +17,7 @@ type ProfilePropsType = {
 
 const Profile = (props: ProfileMapStateToProps) => {
 
-
+    if(!props.isAuth) return <Navigate to={'/login'}/>
     return (
         <div>
             <ProfileInfo profile={props.profile}/>

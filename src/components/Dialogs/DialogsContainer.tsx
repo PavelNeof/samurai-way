@@ -14,66 +14,29 @@ import {AppStateType} from "../../redux/redux-store";
 import {Dispatch} from "redux";
 
 
+type MapStateType = {
+    dialogsPage: DialogPageType
+    isAuth: boolean
+}
 
-let mapStateToProps = (state:AppStateType) =>{
+let mapStateToProps = (state: AppStateType): MapStateType => {
     return {
-        dialogsPage: state.dialogsPage
+        dialogsPage: state.dialogsPage,
+        isAuth: state.auth.isAuth
     }
 }
 
-let mapDispatchToProps = (dispatch:Dispatch) =>{
-    return{
+let mapDispatchToProps = (dispatch: Dispatch) => {
+    return {
         sendMessage: () => {
             dispatch(sendMessageCreator())
         },
-        updateNewMessageBody: (body:string) => {
+        updateNewMessageBody: (body: string) => {
             dispatch(updateNewMessageBodyCreator(body))
         }
     }
 }
 
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
+const DialogsContainer = connect(mapStateToProps, mapDispatchToProps)(Dialogs);
 
 export default DialogsContainer;
-
-
-/*
-
-export type DialogsPropsType = {
-    /!*state:{
-        dialogs: Array<DialogItemPropsType>
-        messages: Array<MessagePropsType>
-        newMessageBody:string
-        dispatch : (action:ActionTypes) => void
-    }*!/
-    // store: StoreType
-    // dialogsPage: DialogPageType
-}
-
-const DialogsContainer = () => {
-    return(
-        <StoreContext.Consumer>
-            {
-                (store:StoreType) =>{
-                    let state = store.getState().dialogsPage;
-
-                    /!*let dialogsElements = state.dialogs.map(d => <DialogItem name={d.name} id={d.id}/>);
-                    let messagesElements = state.messages.map(m => <Message message={m.message}/>);
-                    let newMessageBody = props.dialogsPage.newMassageBody*!/
-
-                    let onSendMessageClick = () => store.dispatch(sendMessageCreator());
-
-                    let onNEwMessageChange = (body:string) => {
-                        store.dispatch(updateNewMessageBodyCreator(body))
-                    }
-
-                    return (
-                        <Dialogs updateNewMessageBody={onNEwMessageChange} sendMessage={onSendMessageClick} dialogsPage={state} />
-                    )
-                }
-            }
-        </StoreContext.Consumer>
-    )
-
-}
-*/

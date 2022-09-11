@@ -9,20 +9,14 @@ import {
     StoreType,
     updateNewMessageBodyCreator
 } from "../../redux/store";
+import {Navigate} from "react-router-dom";
 
 export type DialogsPropsType = {
-    /*state:{
-        dialogs: Array<DialogItemPropsType>
-        messages: Array<MessagePropsType>
-        newMessageBody:string
-        dispatch : (action:ActionTypes) => void
-    }*/
-   /* store: StoreType
-    dialogsPage: DialogPageType*/
+
     updateNewMessageBody: (body: string) => void
     sendMessage: () => void
     dialogsPage: DialogPageType
-
+    isAuth: boolean
 }
 
 const Dialogs = (props: DialogsPropsType) => {
@@ -39,6 +33,8 @@ const Dialogs = (props: DialogsPropsType) => {
         let body = e.target.value;
         props.updateNewMessageBody(body)
     }
+
+    if (!props.isAuth) return <Navigate to={'/login'}/>
 
     return (
         <div className={s.dialogs}>
