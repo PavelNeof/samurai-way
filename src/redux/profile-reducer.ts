@@ -1,6 +1,6 @@
 
 import profile from "../components/Profile/Profile";
-import {follow} from "./users-reducer";
+import {followSuccess} from "./users-reducer";
 
 let initialState = {
     posts: [
