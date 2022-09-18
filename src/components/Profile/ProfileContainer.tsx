@@ -3,29 +3,33 @@ import Profile from "./Profile";
 import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getUserProfile} from "../../redux/profile-reducer";
-import {withRouter} from "../Common/withRouter/withRouter";
+import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
+import {withRouter, WithRouterType} from "../Common/withRouter/withRouter";
 import {usersAPI} from "../../api/api";
 import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 import {compose} from "redux";
 
 
-class ProfileContainer extends React.Component<any, any> {
+class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
     componentDidMount() {
-        console.log('asdasdasd')
+
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = 2;
+            userId = '2';
         }
-        this.props.getUserProfile(userId)
+        this.props.getUserProfile(+userId)
+        this.props.getStatus(+userId)
     }
 
     render() {
-        // if(!this.props.isAuth) return <Redirect to={'/login'}/> убрал в <Profile/>
+
         return (
             <div>
-                <Profile profile={this.props.profile}/>
+                <Profile
+                    status ={this.props.status}
+                    updateStatus={this.props.updateStatus}
+                    profile={this.props.profile}/>
             </div>
         )
     }
@@ -33,8 +37,17 @@ class ProfileContainer extends React.Component<any, any> {
 
 export type ProfileMapStateToProps = {
     profile: ProfileType
+    status:string
+   // updateStatus:(status:string)=>void
     //  isAuth: boolean
 }
+type MapDispatchPropsType = {
+    getUserProfile: (userId: number) => void
+    updateStatus: (status: string) => void
+    getStatus: (userId: number) => void
+}
+
+export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {router: {params: {userId: string}}}
 
 export type ProfileMapStateToPropsForRedirect = {
     isAuth: boolean
@@ -52,10 +65,12 @@ export type ProfileType = {
     followed: boolean
 }
 
-
+//вопрос с типизацией ProfileMapStateToProps
 let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
     profile: state.profilePage.profile,
+    status: state.profilePage.status
 })
+
 
 //let AuthRedirectComponent = withAuthRedirect(ProfileContainer)
 
@@ -65,7 +80,7 @@ let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
 //export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile}),
+    connect(mapStateToProps, {getUserProfile,updateStatus,getStatus}),
     withRouter,
    // withAuthRedirect
 )(ProfileContainer)

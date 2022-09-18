@@ -13,4 +13,4 @@ export function withRouter<T>(Component: ComponentType<T>) {
     return ComponentWithRouterProp;
 }
 
-type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
+export type WithRouterType = Location & NavigateFunction & Readonly<Params<string>>;
