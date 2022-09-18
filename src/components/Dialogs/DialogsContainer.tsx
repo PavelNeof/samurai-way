@@ -17,13 +17,13 @@ import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 type MapStateType = {
     dialogsPage: DialogPageType
-   // isAuth: boolean
+
 }
 
 let mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         dialogsPage: state.dialogsPage,
-       // isAuth: state.auth.isAuth
+
     }
 }
 
