@@ -10,6 +10,7 @@ import {AppStateType} from "../../redux/redux-store";
 
 
 import Preloader from "../Common/Preloader/Preloader";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 
 
@@ -82,6 +83,9 @@ let mapStateToProps = (state: AppStateType): mapStateToProps => {
 }
 
 
+let withRedirect = withAuthRedirect(UsersContainer)
+//или если не нужна проверка, то в экспорт дефолт передавать UsersContainer
+
 
 export default connect(mapStateToProps, {
     follow,
@@ -89,4 +93,4 @@ export default connect(mapStateToProps, {
     setCurrentPage,
     toggleFollowingProgress,
     getUsers
-})(UsersContainer);
+})(withRedirect);

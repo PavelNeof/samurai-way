@@ -17,7 +17,7 @@ type ProfilePropsType = {
 
 const Profile = (props: ProfileMapStateToProps) => {
 
-    if(!props.isAuth) return <Navigate to={'/login'}/>
+   // if(!props.isAuth) return <Navigate to={'/login'}/>
     return (
         <div>
             <ProfileInfo profile={props.profile}/>
