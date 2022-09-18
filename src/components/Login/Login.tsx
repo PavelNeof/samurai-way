@@ -1,6 +1,8 @@
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 
+//переделать на https://react-hook-form.com/
+
 const Login = () => {
     const onSubmit = (formData:FormDataType) => {
       console.log(formData)
