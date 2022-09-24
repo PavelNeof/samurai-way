@@ -3,6 +3,7 @@ import axios from "axios";
 import {Dispatch} from "redux";
 import {UsersActionTypes} from "./users-reducer";
 import {authAPI} from "../api/api";
+import {stopSubmit} from "redux-form";
 
 export type initialStateType = {
     usersId: number | null
@@ -44,10 +45,16 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 };
 export const login = (email: string, password: string, rememberMe: boolean) =>
     (dispatch: Dispatch<any>) => {
+
+
+
         authAPI.login(email, password, rememberMe)
             .then(response => {
                     if (response.data.resultCode === 0) {
                         dispatch(getAuthUserData())
+                    } else {
+                       let message = response.data.messages.length > 0 ? response.data.messages[0] : "some Error"
+                        dispatch(stopSubmit('login',{_error: message} ) )
                     }
                 })
     }

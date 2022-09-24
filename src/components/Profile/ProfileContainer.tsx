@@ -16,10 +16,10 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
         let userId = this.props.router.params.userId;
         if (!userId) {
-            userId = '2';
+            userId = this.props.autorizedUserId;
         }
-        this.props.getUserProfile(+userId)
-        this.props.getStatus(+userId)
+        this.props.getUserProfile(userId)
+        this.props.getStatus(userId)
     }
 
     render() {
@@ -38,16 +38,20 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 export type ProfileMapStateToProps = {
     profile: ProfileType
     status:string
+    autorizedUserId: number | null
+    isAuth: boolean
+
    // updateStatus:(status:string)=>void
     //  isAuth: boolean
 }
 type MapDispatchPropsType = {
-    getUserProfile: (userId: number) => void
+    getUserProfile: (userId: number|null) => void
     updateStatus: (status: string) => void
-    getStatus: (userId: number) => void
+    getStatus: (userId: number|null) => void
+
 }
 
-export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {router: {params: {userId: string}}}
+export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {router: {params: {userId: number | null}}}
 
 export type ProfileMapStateToPropsForRedirect = {
     isAuth: boolean
@@ -68,7 +72,9 @@ export type ProfileType = {
 //вопрос с типизацией ProfileMapStateToProps
 let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
     profile: state.profilePage.profile,
-    status: state.profilePage.status
+    status: state.profilePage.status,
+    autorizedUserId: state.auth.usersId,
+    isAuth: state.auth.isAuth
 })
 
 

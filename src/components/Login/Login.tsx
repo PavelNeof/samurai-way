@@ -4,41 +4,41 @@ import {Input} from "../Common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
 import {connect} from "react-redux";
 import {login} from "../../redux/auth-reducer";
-
+import s from "./../Common/FormsControls/FormsControls.module.css"
 import {Navigate} from "react-router-dom";
 import {AppStateType} from "../../redux/redux-store";
 
 
 //переделать на https://react-hook-form.com/
-type FormDataType ={
-    email:string
-    password:string
-    rememberMe:boolean
+type FormDataType = {
+    email: string
+    password: string
+    rememberMe: boolean
 }
 type MapDispatchToPropsType = {
     login: (email: string, password: string, rememberMe: boolean) => void
 }
 
 type LoginMapStateToProps = {
-    isAuth:boolean
+    isAuth: boolean
 }
 type AllLoginType = LoginMapStateToProps & MapDispatchToPropsType
 
 
-const mapStateToProps= (state:AppStateType):LoginMapStateToProps=>{
+const mapStateToProps = (state: AppStateType): LoginMapStateToProps => {
     return {
-       isAuth: state.auth.isAuth
+        isAuth: state.auth.isAuth
     }
 }
 
-const Login = (props:AllLoginType) => {
-    const onSubmit = (formData:FormDataType) => {
-      props.login(formData.email, formData.password, formData.rememberMe)
+const Login = (props: AllLoginType) => {
+    const onSubmit = (formData: FormDataType) => {
+        props.login(formData.email, formData.password, formData.rememberMe)
     }
 
-    if(props.isAuth) {
+    if (props.isAuth) {
         return <Navigate to={'/profile'}/>
-            }
+    }
 
     return <div>
         <h1>LOGIN</h1>
@@ -47,9 +47,9 @@ const Login = (props:AllLoginType) => {
 }
 
 
-export default connect(mapStateToProps,{login})(Login);
+export default connect(mapStateToProps, {login})(Login);
 
-const LoginForm = (props:InjectedFormProps<FormDataType>) => {
+const LoginForm = (props: InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -65,6 +65,9 @@ const LoginForm = (props:InjectedFormProps<FormDataType>) => {
             <div>
                 <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
+            { props.error? <div className={s.formSummaryError}>
+                {props.error}
+            </div>:''}
             <div>
                 <button>Login</button>
             </div>
@@ -73,5 +76,5 @@ const LoginForm = (props:InjectedFormProps<FormDataType>) => {
 }
 
 const LoginReduxForm = reduxForm<FormDataType>({
-    form:'login'
-    })(LoginForm)
+    form: 'login'
+})(LoginForm)
