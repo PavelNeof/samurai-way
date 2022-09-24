@@ -2,39 +2,64 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../Common/FormsControls/FormsControls";
 import {required} from "../../utils/validators/validators";
+import {connect} from "react-redux";
+import {login} from "../../redux/auth-reducer";
+
+import {Navigate} from "react-router-dom";
+import {AppStateType} from "../../redux/redux-store";
+
 
 //переделать на https://react-hook-form.com/
+type FormDataType ={
+    email:string
+    password:string
+    rememberMe:boolean
+}
+type MapDispatchToPropsType = {
+    login: (email: string, password: string, rememberMe: boolean) => void
+}
 
-const Login = () => {
-    const onSubmit = (formData:FormDataType) => {
-      console.log(formData)
+type LoginMapStateToProps = {
+    isAuth:boolean
+}
+type AllLoginType = LoginMapStateToProps & MapDispatchToPropsType
+
+
+const mapStateToProps= (state:AppStateType):LoginMapStateToProps=>{
+    return {
+       isAuth: state.auth.isAuth
     }
+}
+
+const Login = (props:AllLoginType) => {
+    const onSubmit = (formData:FormDataType) => {
+      props.login(formData.email, formData.password, formData.rememberMe)
+    }
+
+    if(props.isAuth) {
+        return <Navigate to={'/profile'}/>
+            }
+
     return <div>
         <h1>LOGIN</h1>
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
 
-export default Login;
 
-type FormDataType ={
-    login:string
-    password:string
-    rememberMe:boolean
-}
-
+export default connect(mapStateToProps,{login})(Login);
 
 const LoginForm = (props:InjectedFormProps<FormDataType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={'Login'} name={'login'} component={Input}
+                <Field placeholder={'Email'} name={'email'} component={Input}
                        validate={[required]}
                 />
             </div>
             <div>
                 <Field placeholder={'Password'} name={'password'} component={Input}
-                       validate={[required]}
+                       validate={[required]} type={"password"}
                 />
             </div>
             <div>
