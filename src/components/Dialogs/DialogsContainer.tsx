@@ -18,7 +18,6 @@ type MapStateType = {
 let mapStateToProps = (state: AppStateType): MapStateType => {
     return {
         dialogsPage: state.dialogsPage,
-
     }
 }
 

@@ -2,16 +2,10 @@ import React, {ChangeEvent} from 'react';
 import s from './Dialogs.module.css';
 import DialogItem from "./DialogItem/DialogItem";
 import Message from "./Message/Message";
-/*import {
-    ActionTypes,
-    DialogPageType,
-    sendMessageCreator,
-    StoreType,
-    updateNewMessageBodyCreator
-} from "../../redux/store";*/
-import {Navigate} from "react-router-dom";
-import {Field, reduxForm} from "redux-form";
+
 import {DialogPageType} from "../../redux/dialogs-reducer";
+
+import {AddMessageFromRedux} from "./AddMessageForm/AddMessageForm";
 
 export type DialogsPropsType = {
 
@@ -52,24 +46,5 @@ const Dialogs = (props: DialogsPropsType) => {
 }
 
 
-export const AddMessageForm = (props: any) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field component={"textarea"}
-                       name="newMessageBody"
-                    // value={newMessageBody}
-                    //    onChange={onNEwMessageChange}
-                       placeholder={'Enter your text'}>
-                </Field>
-            </div>
-            <div>
-                <button>send</button>
-            </div>
-        </form>
-    )
-}
-
-const AddMessageFromRedux = reduxForm({form: "dialogAddMessageForm"})(AddMessageForm)
 
 export default Dialogs;
