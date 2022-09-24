@@ -1,5 +1,4 @@
 import React from "react";
-import {ActionTypes, DialogPageType} from "./store";
 import axios from "axios";
 import {Dispatch} from "redux";
 import {UsersActionTypes} from "./users-reducer";

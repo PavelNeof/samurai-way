@@ -1,4 +1,5 @@
-import {ActionTypes, DialogPageType} from "./store";
+
+import {addPostActionCreator} from "./profile-reducer";
 
 let initialState = {
     dialogs: [
@@ -18,19 +19,35 @@ let initialState = {
     ],
     newMassageBody: ''
 }
+type MessageType = {
+    id: number
+    message: string
+}
+type DialogType = {
+    id: number
+    name: string
+}
+
+export type DialogPageType = {
+    dialogs: Array<DialogType>
+    messages: Array<MessageType>
+    newMassageBody: string
+}
+
+export type ActionTypes =
+    ReturnType<typeof addPostActionCreator> |
+     ReturnType<typeof sendMessageCreator>
+
 
 
 export const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes): DialogPageType => {
   /*  let stateCopy = {...state,messages: [...state.messages]}*/
     switch (action.type) {
-        case "UPDATE-NEW-MESSAGE-BODY":
-            return { ...state, newMassageBody:action.body}
 
         case "SEND-MESSAGE":
-            let body = state.newMassageBody;
+            let body = action.newMessageBody;
             return {
                 ...state,
-                newMassageBody:'',
             messages: [...state.messages,{id: 6, message: body}]
             }
             /*stateCopy.newMassageBody = '';
@@ -51,4 +68,10 @@ export const dialogsReducer = (state: DialogPageType = initialState, action: Act
      state.messages.push(
          {id: 6, message: body}
      );*/
+
+export const sendMessageCreator = (newMessageBody:string) => {
+    return {
+        type: 'SEND-MESSAGE', newMessageBody
+    } as const
+}
 

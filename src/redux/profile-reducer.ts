@@ -1,4 +1,4 @@
-import profile from "../components/Profile/Profile";
+
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 
@@ -9,14 +9,13 @@ let initialState = {
         {id: 3, message: 'Blabla', likesCount: 11},
         {id: 4, message: 'Dada', likesCount: 11}
     ],
-    newPostText: 'it-kamasutra.com',
     profile: null,
     status: ''
 }
 
 export type ProfilePageType = {
     posts: Array<PostType>
-    newPostText: string
+
     profile: any
     status:string
 }
@@ -26,8 +25,8 @@ export type PostType = {
     likesCount: number
 }
 
-export type ProfileActionTypes = ReturnType<typeof updateNewPostTextActionCreator> |
-    ReturnType<typeof addPostActionCreator> | ReturnType<typeof setUserProfile> | ReturnType<typeof setStatus>
+export type ProfileActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof setUserProfile> |
+    ReturnType<typeof setStatus>
 
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionTypes): ProfilePageType => {
@@ -35,12 +34,11 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
         case "ADD_POST":
             let newPost: PostType = {
                 id: 5,
-                message: state.newPostText,
+                message: action.newPostText,
                 likesCount: 0
             }
-            return {...state, posts: [...state.posts, newPost], newPostText: ''}
-        case "UPDATE-NEW-POST-TEXT":
-            return {...state, newPostText: action.newText};
+            return {...state, posts: [...state.posts, newPost], }
+
         case "SET_USER_PROFILE":
             return {...state, profile: action.profile};
         case "SET_STATUS":
@@ -71,12 +69,6 @@ export const updateStatus = (status: string) => (dispatch: Dispatch<ProfileActio
 }
 
 
-export const updateNewPostTextActionCreator = (text: string) => {
-    return {
-        type: 'UPDATE-NEW-POST-TEXT',
-        newText: text
-    } as const
-}
 
 export const addPostActionCreator = (newPostText: string) => {
     return {

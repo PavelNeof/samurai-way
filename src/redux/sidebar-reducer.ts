@@ -1,4 +1,6 @@
-import state, {ActionTypes, SidebarType } from "./store";
+import {ActionTypes} from "./dialogs-reducer";
+
+export type SidebarType = {}
 
 let initialState = {}
 
