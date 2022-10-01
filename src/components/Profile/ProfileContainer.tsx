@@ -1,12 +1,10 @@
 import React from 'react';
 import Profile from "./Profile";
-import axios from "axios";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
 import {withRouter, WithRouterType} from "../Common/withRouter/withRouter";
-import {usersAPI} from "../../api/api";
-import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+
 import {compose} from "redux";
 
 
