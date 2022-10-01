@@ -17,6 +17,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.autorizedUserId;
+            if(!userId){
+                this.props.router.navigate('/login')
+            }
         }
         this.props.getUserProfile(userId)
         this.props.getStatus(userId)
@@ -51,7 +54,14 @@ type MapDispatchPropsType = {
 
 }
 
-export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {router: {params: {userId: number | null}}}
+export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {
+    router: {
+        params: {
+            userId: number | null
+        },
+        navigate: (path: string) => void
+    }
+}
 
 export type ProfileMapStateToPropsForRedirect = {
     isAuth: boolean

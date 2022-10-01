@@ -35,7 +35,7 @@ export type DialogPageType = {
 }
 
 export type ActionTypes =
-    ReturnType<typeof addPostActionCreator> |
+    // ReturnType<typeof addPostActionCreator> |
      ReturnType<typeof sendMessageCreator>
 
 

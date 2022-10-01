@@ -46,8 +46,6 @@ export const authReducer = (state: initialStateType = initialState, action: Auth
 export const login = (email: string, password: string, rememberMe: boolean) =>
     (dispatch: Dispatch<any>) => {
 
-
-
         authAPI.login(email, password, rememberMe)
             .then(response => {
                     if (response.data.resultCode === 0) {
@@ -72,7 +70,7 @@ export const logout = () =>
 
 export const getAuthUserData = () =>
     (dispatch: Dispatch<AuthActionTypes>) => {
-        authAPI.me()
+       return authAPI.me()
             .then(
                 response => {
                     if (response.data.resultCode === 0) {

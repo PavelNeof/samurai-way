@@ -87,7 +87,7 @@ let withRedirect = withAuthRedirect(UsersContainer)
 //или если не нужна проверка, то в экспорт дефолт передавать UsersContainer
 
 export default compose<React.ComponentType>(
-    withAuthRedirect,
+   // withAuthRedirect,
     connect(mapStateToProps, {
         follow,
         unfollow,
