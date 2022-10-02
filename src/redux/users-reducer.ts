@@ -101,7 +101,7 @@ type DispatchThunkType = {
     setTotalUsersCount: (totalUsersCount: number) => void
 }
 
-export const getUsers = (page: number, pageSize: number) => {
+export const getUsersTC = (page: number, pageSize: number) => {
     return (dispatch: Dispatch<UsersActionTypes> ) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))

@@ -3,7 +3,7 @@ import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
 import {getStatus, getUserProfile, updateStatus} from "../../redux/profile-reducer";
-import {withRouter, WithRouterType} from "../Common/withRouter/withRouter";
+import {withRouter} from "../Common/withRouter/withRouter";
 
 import {compose} from "redux";
 
