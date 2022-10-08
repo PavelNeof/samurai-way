@@ -8,20 +8,15 @@ import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 
 type ProfileInfoPropsType = {
     profile: ProfileType
-    status:string
+    status: string
 }
 
 const ProfileInfo = (props: ProfilePropsType) => {
-    if(!props.profile){
+    if (!props.profile) {
         return <Preloader/>
     }
     return (
         <div>
-            {/*<div>*/}
-            {/*    <img*/}
-            {/*       // src='https://www.meme-arsenal.com/memes/33eba91466f7b9ceea6485f2c2c1494e.jpg'/>*/}
-            {/*        src={props.profile.photos.large}/>*/}
-            {/*</div>*/}
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large}/>
                 <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
