@@ -103,11 +103,3 @@ export default compose<React.ComponentType>(
         getUsersTC
     })
 )(UsersContainer)
-
-// export default connect(mapStateToProps, {
-//     follow,
-//     unfollow,
-//     setCurrentPage,
-//     toggleFollowingProgress,
-//     getUsers
-// })(withRedirect);
