@@ -13,7 +13,17 @@ type getUsersType = {
 }*/
 
 
-export const usersAPI = {
+
+export type usersAPIType = {
+    getUsers: (currentPage: number, pageSize: number) =>  Promise<AxiosResponse<any, any>>;
+    // getUsers: any;
+    unfollow: (userId: number) => Promise<AxiosResponse<void>>;
+    follow: (userId: number) => Promise<AxiosResponse<any, any>>;
+    getProfile: (userId: number) => Promise<AxiosResponse<any, any>>;
+}
+
+
+export const usersAPI: usersAPIType = {
     getUsers(currentPage: number = 1, pageSize: number = 10): Promise<AxiosResponse<getUsersType>> {
         return instance.get(`users?page=${currentPage}&count=${pageSize}`)
     },
