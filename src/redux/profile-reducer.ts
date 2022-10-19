@@ -26,7 +26,7 @@ export type PostType = {
 }
 
 export type ProfileActionTypes = ReturnType<typeof addPostActionCreator> | ReturnType<typeof setUserProfile> |
-    ReturnType<typeof setStatus>
+    ReturnType<typeof setStatus> | ReturnType<typeof deletePost>
 
 
 export const profileReducer = (state: ProfilePageType = initialState, action: ProfileActionTypes): ProfilePageType => {
@@ -43,6 +43,8 @@ export const profileReducer = (state: ProfilePageType = initialState, action: Pr
             return {...state, profile: action.profile};
         case "SET_STATUS":
             return {...state, status: action.status};
+        case "DELETE_POST":
+            return {...state, posts:state.posts.filter(p=>p.id != action.postId)};
         default:
             return state
     }
@@ -74,6 +76,13 @@ export const addPostActionCreator = (newPostText: string) => {
     return {
         type: "ADD_POST",
         newPostText: newPostText
+    } as const
+}
+
+export const deletePost = (postId:number) => {
+    return {
+        type: "DELETE_POST",
+        postId
     } as const
 }
 
