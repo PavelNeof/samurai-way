@@ -14,10 +14,10 @@ export type MyPostsPropsType = {
 
 const MaxLength10 = MaxLengthCreator(10)
 
-const MyPosts = (props: MyPostsPropsType) => {
+const MyPosts = React.memo((props: MyPostsPropsType) => {
     let postsElements =
         props.posts.map((p,index) => <Post key={index} message={p.message} likesCount={p.likesCount}/>);
-
+console.log('123')
 
 
     const onAddPost = (value:any) => {
@@ -36,7 +36,7 @@ const MyPosts = (props: MyPostsPropsType) => {
             </div>
         </div>
     )
-}
+})
 
 
 
