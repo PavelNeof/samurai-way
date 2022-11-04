@@ -5,6 +5,7 @@ import userPhoto from '../../assets/images/user.jpg'
 import {NavLink} from "react-router-dom";
 import axios from "axios";
 import {usersAPI} from "../../api/api";
+import Paginator from "../Common/Paginator/Paginator";
 
 
 type UsersType = {
@@ -20,20 +21,26 @@ type UsersType = {
 
 let Users = (props: UsersType) => {
 
-    let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    let pages = [];
-    for (let i = 1; i <= pagesCount; i++) {
-        pages.push(i)
-    }
+    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
+    // let pages = [];
+    // for (let i = 1; i <= pagesCount; i++) {
+    //     pages.push(i)
+    // }
 
     return <div>
         <div>
-            {pages.map((p,index) => {
-                return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}
-                             onClick={(e) => {
-                                 props.onPageChanged(p)
-                             }}>{p + ' '}</span>
-            })}
+            {/*{pages.map((p,index) => {*/}
+            {/*    return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}*/}
+            {/*                 onClick={(e) => {*/}
+            {/*                     props.onPageChanged(p)*/}
+            {/*                 }}>{p + ' '}</span>*/}
+            {/*})}*/}
+            <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
+                       pageSize={props.pageSize}  totalUsersCount={props.totalUsersCount}
+                       follow={props.follow} unfollow={props.unfollow}
+                       followingInProgress={props.followingInProgress}
+                       users={props.users}
+            />
         </div>
         {props.users.map((u: initialStateUsersType) =>
                 <span key={u.id}>
