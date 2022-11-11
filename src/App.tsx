@@ -1,11 +1,10 @@
 import React from 'react';
-import './App.css';
-import Header from './components/Header/Header';
+import './App.css'
 import Navbar from './components/Navbar/Navbar';
 import {Route, Routes} from "react-router-dom";
-import DialogsContainer from "./components/Dialogs/DialogsContainer";
+//import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
-import ProfileContainer from "./components/Profile/ProfileContainer";
+//import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
 import {compose} from "redux";
@@ -15,7 +14,10 @@ import {connect} from "react-redux";
 import {AppStateType} from "./redux/redux-store";
 import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
+import {WithSuspense} from "./hoc/withSuspense";
 
+const DialogsContainer = React.lazy(()=>import("./components/Dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(()=>import("./components/Profile/ProfileContainer"))
 
 class App extends React.Component<AllUsersType> {
 
@@ -35,12 +37,12 @@ class App extends React.Component<AllUsersType> {
 
                 <div className='app-wrapper-content'>
                     <Routes>
-                        <Route path='/dialogs'
-                               element={<DialogsContainer/>}/>
+                        <Route path={'/dialogs'}
+                               element={WithSuspense(DialogsContainer)}/>
                         <Route path='/profile/:userId'
-                               element={<ProfileContainer/>}/>
+                               element={WithSuspense(ProfileContainer)}/>
                         <Route path='/profile/'
-                               element={<ProfileContainer/>}/>
+                               element={WithSuspense(ProfileContainer)}/>
                         <Route path={'/users'}
                                element={<UsersContainer/>}/>
                         <Route path={'/login'}
