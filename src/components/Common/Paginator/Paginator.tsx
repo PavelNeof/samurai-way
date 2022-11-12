@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState} from "react";
 import styles from "./Paginator.module.css"
 import userPhoto from '../../../assets/images/user.jpg'
 import {NavLink} from "react-router-dom";
@@ -25,14 +25,26 @@ let Paginator = (props: UsersType) => {
         pages.push(i)
     }
 
-    return <div>
+    let portionCount = Math.ceil(pagesCount/props.pageSize)
+    let [portionNumber, setPortionNumber] = useState(1);
+    let leftPortionPageNumber = (portionNumber - 1) * props.pageSize + 1;
+    let rightPortionPageNumber = portionNumber * props.pageSize;
+
+    return <div className={styles.paginator}>
         <div>
-            {pages.map((p,index) => {
+            {portionNumber > 1 &&
+            <button onClick={()=>{ setPortionNumber(portionNumber - 1)}}>PREV</button>}
+
+            {pages
+                .filter(p=> p>= leftPortionPageNumber && p<=rightPortionPageNumber)
+                .map((p,index) => {
                 return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}
                              onClick={(e) => {
                                  props.onPageChanged(p)
                              }}>{p + ' '}</span>
             })}
+            { portionCount > portionNumber &&
+                <button onClick={()=>{ setPortionNumber(portionNumber + 1)}}>NEXT</button>}
         </div>
 
     </div>
