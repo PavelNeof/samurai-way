@@ -1,7 +1,5 @@
 import React, {useState} from "react";
 import styles from "./Paginator.module.css"
-import userPhoto from '../../../assets/images/user.jpg'
-import {NavLink} from "react-router-dom";
 import {initialStateUsersType} from "../../../redux/users-reducer";
 
 
