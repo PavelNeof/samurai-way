@@ -1,16 +1,27 @@
 .header {
     grid-area: h;
-    background-color: lightslategray;
+    background-color: #e44d3a;
 }
 
 .header img {
     width: 20px;
 }
 
-.loginBlock{
-    float: right;
-
+.loginBlock {
+    /*float: right;*/
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
 }
+
+.insideBlock{
+    padding-right: 20px;
+}
+
+.text{
+    color:#f2f2f2
+}
+
 .loginBlock a {
-    color:wheat;
+    color: wheat;
 }
