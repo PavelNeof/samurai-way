@@ -7,8 +7,17 @@
 .item a {
     color: darkslategrey;
     text-decoration: none;
+
+}
+
+.item a:hover{
+    color: #53d690;
+}
+
+.item a:active{
+    color:#e44d3a;
 }
 
 .item a.activeLink {
-    color: gold;
+    color: #53d690;
 }

@@ -17,19 +17,44 @@
 }
 
 .label {
-    width: 180px;
-    height: 50px;
-    border-radius: 4px;
+    /*width: 180px;*/
+    /*height: 50px;*/
+    /*border-radius: 4px;*/
     text-align: center;
     cursor: pointer;
-    display: block;
+    /*display: block;*/
     font: 14px/50px Tahoma;
     transition: all 0.18s ease-in-out;
-    border: 1px solid #333;
-    color: #333;
+    /*border: 1px solid #333;*/
+    /*color: #333;*/
+    width: 200px;
+    height: 30px;
+    color: #f2f2f2;
+    background-color: #e44d3a;
+    border: none;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
 }
 
 .label:hover {
     color: white;
-    background: #333;
+    background: #53d690;
+}
+
+.inputBox{
+    margin-top:10px;
+    padding-left: 20px;
+}
+.input{
+    border-radius: 2px;
+    background-color: #f2f2f2;
+    min-width: 200px;
+    border-bottom: #e44d3a 2px solid;
+}
+.input:hover{
+background-color: lightgrey;
+    transition: .3s;
 }

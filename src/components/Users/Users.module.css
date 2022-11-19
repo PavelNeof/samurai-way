@@ -1,9 +1,42 @@
+.container {
+padding: 10px;
+}
+
 .userPhoto {
     width:100px;
     height: 100px;
     border-radius: 10%;
 }
 
+
 .selectedPage {
     font-weight: bold;
+}
+
+.follow{
+    width: 100px;
+    height: 30px;
+    color: #f2f2f2;
+    background-color: #e44d3a;
+    border: none;
+    border-radius: 10px;
+}
+
+.follow:hover {
+    background-color: #53d690;
+    transition: 0.3s;
+}
+
+.unfollow{
+    width: 100px;
+    height: 30px;
+    color: #f2f2f2;
+    background-color: #939393;
+    border: none;
+    border-radius: 10px;
+}
+
+.unfollow:hover {
+    background-color: #51a5fb;
+    transition: 0.3s;
 }

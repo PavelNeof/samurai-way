@@ -29,7 +29,7 @@ console.log('123')
 
     return (
         <div className={s.postsBlock}>
-            <h3>My posts</h3>
+            <h3 className={s.nameBlock}>My posts</h3>
             <AddNewPostFormRedux onSubmit={onAddPost}/>
             <div className={s.posts}>
                 {postsElements}
@@ -44,10 +44,10 @@ const AddNewPostForm = (props:any) =>{
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field name="newPostText" component={Textarea} validate={[required, MaxLength10]}></Field>
+                <Field className={s.textArea} name="newPostText" component={Textarea} validate={[required, MaxLength10]}></Field>
             </div>
             <div>
-                <button>Add post</button>
+                <button className={'button'}>Add post</button>
             </div>
         </form>
     )

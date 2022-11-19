@@ -1,5 +1,6 @@
 import React, {ChangeEvent, useEffect, useState} from "react";
 import {AppStateType} from "../../../redux/redux-store";
+import s from './ProfileInfo.module.css'
 
 type ProfileStatusPropsType = {
     status: string
@@ -30,12 +31,12 @@ export const ProfileStatusWithHooks = (props: ProfileStatusPropsType) => {
     return (
         <div>
             {!editMode &&
-                <div>
-                    <span onDoubleClick={activateEditMode}>{props.status || "-------"}</span>
+                <div className={s.inputBox}>
+                    <span className={s.input} onDoubleClick={activateEditMode}>{props.status || "-------"}</span>
                 </div>
             }
             {editMode &&
-                <div>
+                <div className={s.inputBox}>
                     <input autoFocus={true} onChange={onStatusChange} onBlur={deactivateEditMode}
                            value={status}/>
                 </div>}

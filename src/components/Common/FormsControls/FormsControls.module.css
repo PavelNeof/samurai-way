@@ -1,4 +1,18 @@
+.container{
+    padding:10px;
+}
 
+.nameBlock{
+    color: darkslategrey;
+}
+
+.checkbox{
+    padding-top: 10px;
+}
+
+.buttonBox{
+    padding-top: 10px;
+}
 
 .formControl.error input,
 .formControl.error textarea {

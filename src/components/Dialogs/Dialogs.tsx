@@ -36,6 +36,7 @@ const Dialogs = (props: DialogsPropsType) => {
                 {dialogsElements}
             </div>
             <div className={s.messages}>
+                <div className={s.header}>messages</div>
                 {messagesElements}
             </div>
             <AddMessageFromRedux onSubmit={addNewMessage}/>

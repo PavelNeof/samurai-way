@@ -40,8 +40,8 @@ const Login = (props: AllLoginType) => {
         return <Navigate to={'/profile'}/>
     }
 
-    return <div>
-        <h1>LOGIN</h1>
+    return <div className={s.container}>
+        <h1 className={s.nameBlock}>LOGIN</h1>
         <LoginReduxForm onSubmit={onSubmit}/>
     </div>
 }
@@ -62,14 +62,14 @@ const LoginForm = (props: InjectedFormProps<FormDataType>) => {
                        validate={[required]} type={"password"}
                 />
             </div>
-            <div>
-                <Field component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
+            <div className={s.checkbox}>
+                <Field  component={'input'} name={'rememberMe'} type={'checkbox'}/> remember me
             </div>
             { props.error? <div className={s.formSummaryError}>
                 {props.error}
             </div>:''}
-            <div>
-                <button>Login</button>
+            <div className={s.buttonBox}>
+                <button className={'button'}>Login</button>
             </div>
         </form>
     )

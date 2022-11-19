@@ -27,7 +27,7 @@ let Users = (props: UsersType) => {
     //     pages.push(i)
     // }
 
-    return <div>
+    return <div className={styles.container}>
         <div>
             {/*{pages.map((p,index) => {*/}
             {/*    return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}*/}
@@ -52,8 +52,8 @@ let Users = (props: UsersType) => {
                 </div>
                 <div>
 {u.followed
-    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.unfollow(u.id)}> Unfollow </button>
-    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {props.follow(u.id)}}> Follow </button>
+    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.unfollow(u.id)} className={styles.unfollow}> Unfollow </button>
+    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {props.follow(u.id)}} className={styles.follow}> Follow </button>
 }
 </div>
                 </span>

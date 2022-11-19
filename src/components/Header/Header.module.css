@@ -1,27 +1,75 @@
 .header {
     grid-area: h;
     background-color: #e44d3a;
+
 }
 
 .header img {
     width: 20px;
 }
 
+.img{
+    background-image: url("../../assets/images/logo.png");
+    background-repeat: no-repeat;
+    height: 30px;
+    width: 100px;
+    padding-left: 10px;
+}
+
 .loginBlock {
     /*float: right;*/
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
+    padding-top: 20px;
 }
 
-.insideBlock{
+.insideBlock {
     padding-right: 20px;
 }
 
-.text{
-    color:#f2f2f2
+.text {
+    color: #f2f2f2;
+    padding-right: 5px;
+}
+
+.button {
+    width: 100px;
+    height: 30px;
+    color: #e44d3a;
+    background-color: #f2f2f2;
+    border: none;
+    border-radius: 10px;
+}
+
+.button:hover {
+    background-color: #adadad;
+    color:white;
+    transition: 0.3s;
 }
 
 .loginBlock a {
     color: wheat;
+}
+
+.login{
+    text-decoration: none;
+    width: 100px;
+    height: 30px;
+    color:#e44d3a !important;
+    background-color: #f2f2f2;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.login:active{
+    color: #e44d3a;
+}
+
+.login:hover{
+    background-color: #adadad;
+    color:white;
+    transition: 0.3s;
 }
