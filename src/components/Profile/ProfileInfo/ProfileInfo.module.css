@@ -36,6 +36,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-bottom: 10px;
 
 }
 
@@ -44,9 +45,13 @@
     background: #53d690;
 }
 
+.flexBoxForInput{
+    display: flex;
+    flex-direction: row;
+}
+
 .inputBox{
-    margin-top:10px;
-    padding-left: 20px;
+
 }
 .input{
     border-radius: 2px;
@@ -57,4 +62,12 @@
 .input:hover{
 background-color: lightgrey;
     transition: .3s;
+}
+
+.contact{
+    padding-left: 10px;
+}
+
+.b{
+   color: darkslategrey;
 }

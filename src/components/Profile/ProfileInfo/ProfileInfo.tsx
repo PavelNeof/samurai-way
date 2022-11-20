@@ -1,18 +1,16 @@
-import React, {ChangeEvent} from 'react';
+import React, {ChangeEvent, useState} from 'react';
 import s from './ProfileInfo.module.css';
 import Preloader from "../../Common/Preloader/Preloader";
-import {ProfileType} from "../ProfileContainer";
-import {ProfileStatus} from "./ProfileStatus";
 import {ProfilePropsType} from "../Profile";
-import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import userPhoto from '../../../assets/images/user.jpg'
+import {ProfileData} from "./ProfileData";
+import {ProfileDataFormRedux, ProfileDataType} from "./ProfileDataForm";
 
-type ProfileInfoPropsType = {
-    profile: ProfileType
-    status: string
-}
 
 const ProfileInfo = (props: ProfilePropsType) => {
+
+    let [editMode, setEditMode] = useState(false)
+
     if (!props.profile) {
         return <Preloader/>
     }
@@ -25,15 +23,25 @@ const ProfileInfo = (props: ProfilePropsType) => {
         }
     }
 
+    const onSubmit = (formData: ProfileDataType) => {
+        props.saveProfile(formData)
+    }
+
     return (
         <div>
             <div className={s.descriptionBlock}>
                 <img src={props.profile.photos.large || userPhoto} className={s.mainPhoto}/>
-                {props.isOwner && <label className={s.label}> load avatar <input type={'file'} className={s.my} onChange={onMainPhotoSelected}/></label>}
-                <ProfileStatusWithHooks status={props.status} updateStatus={props.updateStatus}/>
+                {props.isOwner && <label className={s.label}> load avatar <input type={'file'} className={s.my}
+                                                                                 onChange={onMainPhotoSelected}/></label>}
+                {editMode
+                    ? <ProfileDataFormRedux onSubmit={onSubmit}/>
+                    : <ProfileData profile={props.profile} updateStatus={props.updateStatus} status={props.status}
+                                   isOwner={props.isOwner} goToEditMode={()=>{setEditMode(true)}}/>}
             </div>
         </div>
     )
 }
+
+
 
 export default ProfileInfo;

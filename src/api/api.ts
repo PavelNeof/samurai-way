@@ -1,5 +1,6 @@
 import axios, {AxiosResponse} from "axios";
 import {initialStateUsersType} from "../redux/users-reducer";
+import {ProfileApiType, ProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 type getUsersType = {
         error: string | null
@@ -58,6 +59,9 @@ export const profileAPI = {
     },
     updateStatus(status:string){
         return instance.put(`profile/status`, {status})
+    },
+    saveProfile(profile:ProfileApiType){
+        return instance.put(`profile`, profile)
     },
     savePhoto(photoFile:string){
         const formData = new FormData();

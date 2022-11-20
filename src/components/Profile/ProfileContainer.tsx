@@ -2,10 +2,11 @@ import React from 'react';
 import Profile from "./Profile";
 import {connect} from "react-redux";
 import {AppStateType} from "../../redux/redux-store";
-import {getStatus, getUserProfile, savePhoto, updateStatus} from "../../redux/profile-reducer";
+import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from "../../redux/profile-reducer";
 import {withRouter} from "../Common/withRouter/withRouter";
 
 import {compose} from "redux";
+import {ProfileDataType} from "./ProfileInfo/ProfileDataForm";
 
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
@@ -41,7 +42,9 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
                     status ={this.props.status}
                     updateStatus={this.props.updateStatus}
                     profile={this.props.profile}
-                    savePhoto={this.props.savePhoto}/>
+                    savePhoto={this.props.savePhoto}
+                    saveProfile={this.props.saveProfile}
+                />
             </div>
         )
     }
@@ -61,7 +64,7 @@ type MapDispatchPropsType = {
     updateStatus: (status: string) => void
     getStatus: (userId: number|null) => void
     savePhoto: (file:string) => void
-
+    saveProfile:(formData: ProfileDataType)=>void
 }
 
 export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {
@@ -87,7 +90,23 @@ export type ProfileType = {
     }
     status: string
     followed: boolean
+    fullName:string
+    lookingForAJob:boolean
+    lookingForAJobDescription:string | null
+    aboutMe:string | null
+    contacts: {
+        facebook: null | string
+        website: null | string
+        vk: null | string
+        twitter: null | string
+        instagram: null | string
+        youtube: null | string
+        github: null | string
+        mainLink: null | string
+    }
 }
+
+
 
 //вопрос с типизацией ProfileMapStateToProps
 let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
@@ -106,7 +125,7 @@ let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
 //export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,updateStatus,getStatus,savePhoto}),
+    connect(mapStateToProps, {getUserProfile,updateStatus,getStatus,savePhoto,saveProfile}),
     withRouter,
    // withAuthRedirect
 )(ProfileContainer)

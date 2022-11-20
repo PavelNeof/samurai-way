@@ -1,5 +1,6 @@
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
+import {ProfileApiType, ProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 
 let initialState = {
     posts: [
@@ -74,6 +75,14 @@ export const updateStatus = (status: string) => (dispatch: Dispatch<ProfileActio
 
 export const savePhoto = (file: string) => async (dispatch: Dispatch<ProfileActionTypes>) => {
     let response = await profileAPI.savePhoto(file)
+    if (response.data.resultCode === 0) {
+        dispatch(savePhotoSuccess(response.data.data.photos))
+    }
+
+}
+
+export const saveProfile = (profile: ProfileApiType) => async (dispatch: Dispatch<ProfileActionTypes>) => {
+    let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         dispatch(savePhotoSuccess(response.data.data.photos))
     }
