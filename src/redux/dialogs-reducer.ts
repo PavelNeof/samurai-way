@@ -34,13 +34,13 @@ export type DialogPageType = {
     newMassageBody: string
 }
 
-export type ActionTypes =
+export type DialogActionTypes =
     // ReturnType<typeof addPostActionCreator> |
      ReturnType<typeof sendMessageCreator>
 
 
 
-export const dialogsReducer = (state: DialogPageType = initialState, action: ActionTypes): DialogPageType => {
+export const dialogsReducer = (state: DialogPageType = initialState, action: DialogActionTypes): DialogPageType => {
   /*  let stateCopy = {...state,messages: [...state.messages]}*/
     switch (action.type) {
 

@@ -1,6 +1,7 @@
 import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {ProfileApiType, ProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
+import {AppStateType, AppThunkType} from "./redux-store";
 
 let initialState = {
     posts: [
@@ -81,10 +82,13 @@ export const savePhoto = (file: string) => async (dispatch: Dispatch<ProfileActi
 
 }
 
-export const saveProfile = (profile: ProfileApiType) => async (dispatch: Dispatch<ProfileActionTypes>) => {
+export const saveProfile = (profile: ProfileApiType): AppThunkType => async (dispatch, getState) => {
+   const userId = getState().auth.usersId
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
-        dispatch(savePhotoSuccess(response.data.data.photos))
+        // @ts-ignore
+        dispatch(getUserProfile(userId))
+
     }
 
 }

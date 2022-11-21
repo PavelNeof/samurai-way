@@ -5,9 +5,14 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../Common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
 
 
 const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
+
+    const profile = useSelector<AppStateType, ProfileApiType>(state => state.profilePage.profile)
+
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
@@ -15,14 +20,14 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
             </div>
             <div>
                 <b className={s.b}>Full name</b>: <Field placeholder={'FullName'} name={'fullName'} component={Input}
-                                                         validate={[required]}
+
             />
                 {/*<b className={s.b}>{props.profile.fullName}</b>*/}
             </div>
             <div>
                 <b className={s.b}>Looking for a job</b>:<Field placeholder={''} name={'lookingForAJob'}
                                                                 component={Input}
-                                                                validate={[required]} type={'checkbox'}
+                                                                 type={'checkbox'}
             />
 
                 {/*<b className={s.b}>{props.profile.lookingForAJob ? 'yes' : 'no'}</b> , {type: 'checkbox'}*/}
@@ -31,22 +36,26 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
                 <b className={s.b}>My professional skills</b>: <Field placeholder={'My Professional skills'}
                                                                       name={'lookingForAJobDescription'}
                                                                       component={Input} type={'textarea'}
-                                                                      validate={[required]}/>
+                                                                      />
                 {/*<b className={s.b}>{props.profile.lookingForAJobDescription}</b>*/}
             </div>
             <div>
                 <b className={s.b}>About me</b>: <Field placeholder={'About me'} name={'aboutMe'}
                                                         component={Input} type={'textarea'}
-                                                        validate={[required]}/>
+                                                        />
                 {/*<b className={s.b}>{props.profile.aboutMe}</b>*/}
             </div>
 
-            {/*<div>*/}
-            {/*    <b className={s.b}>Contacts</b>: {Object.keys(props.profile.contacts).map(key => {*/}
-            {/*    // @ts-ignore*/}
-            {/*    return <Contact key={key} contactTitle={key} contactValue={props.profile.contacts[key]}/>*/}
-            {/*})}*/}
-            {/*</div>*/}
+            <div>
+                <b className={s.b}>Contacts</b>: {Object.keys(profile.contacts).map(key => {
+                // @ts-ignore
+                return <div>
+                    <b>{key}: <Field placeholder={key} name={'contacts.'+ key}
+                                     component={Input}
+                                     /></b>
+                </div>
+            })}
+            </div>
 
             {/*<div className={s.flexBoxForInput}>*/}
             {/*    <b className={s.b}>Status</b>:<ProfileStatusWithHooks status={props.status}*/}
@@ -60,7 +69,7 @@ export const ProfileDataFormRedux = reduxForm<ProfileDataType>({
     form: 'edit-profile'
 })(ProfileDataForm)
 
-export default ProfileDataForm;
+
 
 const Contact = (props: ContactType) => {
     return <div>

@@ -6,7 +6,7 @@ type initialStateType = {
     initialized:boolean
 }
 
-type AppActionTypes = ReturnType<typeof initializedSuccess>
+export type AppActionTypes = ReturnType<typeof initializedSuccess>
 
 let initialState: initialStateType = {
    initialized:false
