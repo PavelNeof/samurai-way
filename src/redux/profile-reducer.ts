@@ -2,6 +2,7 @@ import {Dispatch} from "redux";
 import {profileAPI, usersAPI} from "../api/api";
 import {ProfileApiType, ProfileDataType} from "../components/Profile/ProfileInfo/ProfileDataForm";
 import {AppStateType, AppThunkType} from "./redux-store";
+import {stopSubmit} from "redux-form";
 
 let initialState = {
     posts: [
@@ -88,7 +89,11 @@ export const saveProfile = (profile: ProfileApiType): AppThunkType => async (dis
     if (response.data.resultCode === 0) {
         // @ts-ignore
         dispatch(getUserProfile(userId))
-
+    } else{
+        //let message = response.data.messages.length > 0 ? response.data.messages[0] : "some Error"
+       // dispatch(stopSubmit('login', {_error: message}))
+        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
+        return Promise.reject(response.data.messages[0])
     }
 
 }
@@ -119,3 +124,6 @@ export const setStatus = (status: string) => ({
 export const savePhotoSuccess = (photos: string) => ({
     type: "SAVE_PHOTO_SUCCESS", photos
 } as const)
+
+
+

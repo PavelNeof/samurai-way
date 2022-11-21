@@ -5,54 +5,63 @@ import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../Common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
+import {editModeAC} from "../../../redux/app-reducer";
+
 
 
 const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
 
     const profile = useSelector<AppStateType, ProfileApiType>(state => state.profilePage.profile)
+    const editMode = useSelector<AppStateType,boolean>(state => state.app.isEdit)
+
+    const dispatch = useDispatch()
+
+    const HandleSubmit = () =>{
+      if(  props.error ) {
+          dispatch(editModeAC(false))
+      }
+
+
+    }
 
     return (
         <form onSubmit={props.handleSubmit}>
-            <div>
-                <button>Save</button>
-            </div>
-            <div>
-                <b className={s.b}>Full name</b>: <Field placeholder={'FullName'} name={'fullName'} component={Input}
 
-            />
-                {/*<b className={s.b}>{props.profile.fullName}</b>*/}
+
+            <div>
+               <button>Save</button>
             </div>
+            {props.error && <div className={s.error}>ERROR:{props.error}</div>}
+            <div>
+                <b className={s.b}>Full name</b>: <Field placeholder={'FullName'} name={'fullName'} component={Input}/>
+            </div>
+
             <div>
                 <b className={s.b}>Looking for a job</b>:<Field placeholder={''} name={'lookingForAJob'}
                                                                 component={Input}
-                                                                 type={'checkbox'}
-            />
-
-                {/*<b className={s.b}>{props.profile.lookingForAJob ? 'yes' : 'no'}</b> , {type: 'checkbox'}*/}
+                                                                type={'checkbox'}/>
             </div>
+
             <div>
                 <b className={s.b}>My professional skills</b>: <Field placeholder={'My Professional skills'}
                                                                       name={'lookingForAJobDescription'}
-                                                                      component={Input} type={'textarea'}
-                                                                      />
-                {/*<b className={s.b}>{props.profile.lookingForAJobDescription}</b>*/}
+                                                                      component={Input} type={'textarea'}/>
             </div>
+
             <div>
                 <b className={s.b}>About me</b>: <Field placeholder={'About me'} name={'aboutMe'}
-                                                        component={Input} type={'textarea'}
-                                                        />
-                {/*<b className={s.b}>{props.profile.aboutMe}</b>*/}
+                                                        component={Input} type={'textarea'}/>
             </div>
 
             <div>
                 <b className={s.b}>Contacts</b>: {Object.keys(profile.contacts).map(key => {
                 // @ts-ignore
-                return <div>
-                    <b>{key}: <Field placeholder={key} name={'contacts.'+ key}
+                return <div key={key}>
+                    <b>{key}: <Field placeholder={key} name={'contacts.' + key}
                                      component={Input}
-                                     /></b>
+                    /></b>
                 </div>
             })}
             </div>
@@ -68,7 +77,6 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
 export const ProfileDataFormRedux = reduxForm<ProfileDataType>({
     form: 'edit-profile'
 })(ProfileDataForm)
-
 
 
 const Contact = (props: ContactType) => {
@@ -92,9 +100,9 @@ export type ProfileDataType = {
 
 export type ProfileApiType = {
     userId: number
-    lookingForAJob:boolean
-    lookingForAJobDescription:string | null
-    fullName:string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    fullName: string
     contacts: {
         facebook: null | string
         website: null | string
