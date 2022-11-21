@@ -19,15 +19,13 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
     const dispatch = useDispatch()
 
     const HandleSubmit = () =>{
-      if(  props.error ) {
-          dispatch(editModeAC(false))
+      if(props.error ) {
+          dispatch(editModeAC(true))
       }
-
-
     }
 
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.error? HandleSubmit: props.handleSubmit}>
 
 
             <div>

@@ -33,7 +33,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
     const onSubmit = (formData: ProfileDataType) => {
         props.saveProfile(formData)
        // setEditMode(false)
-        dispatch(editModeAC(false))
+      //  dispatch(editModeAC(false))
     }
 
     return (
