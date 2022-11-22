@@ -6,6 +6,16 @@
     color: darkslategrey;
 }
 
+.flex{
+    display: flex;
+    flex-direction: row;
+}
+
+.logopas{
+    padding-left: 50px;
+    color: lightslategrey;
+}
+
 .checkbox{
     padding-top: 10px;
 }

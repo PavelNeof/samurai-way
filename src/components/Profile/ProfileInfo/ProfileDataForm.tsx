@@ -16,7 +16,7 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileApiType>) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <button>Save</button>
+                <button className={'button'}>Save ↓</button>
             </div>
             {props.error && <div className={s.error}>ERROR:{props.error}</div>}
             <div>

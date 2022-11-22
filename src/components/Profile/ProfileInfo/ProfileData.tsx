@@ -10,18 +10,18 @@ export const ProfileData = (props: ProfileDataType) => {
     return (
         <div>
             {props.isOwner && <div>
-                <button onClick={props.goToEditMode}>Edit</button>
+                <button onClick={props.goToEditMode} className={'button'}>Edit ↓</button>
             </div>}
             <div>
                 <b className={s.b}>Full name</b>:<b className={s.word}>{props.profile.fullName}</b>
             </div>
             <div>
-                <b className={s.b}>Looking for a job</b>:<b
-                className={s.word}>{props.profile.lookingForAJob ? 'yes' : 'no'}</b>
+                <b className={s.b}>Looking for a job</b>:<span
+                className={s.word}>{props.profile.lookingForAJob ? 'yes' : 'no'}</span>
             </div>
             {props.profile.lookingForAJob && <div>
-                <b className={s.b}>My professional skills</b>: <b
-                className={s.word}>{props.profile.lookingForAJobDescription}</b>
+                <b className={s.b}>My professional skills</b>: <span
+                className={s.word}>{props.profile.lookingForAJobDescription}</span>
             </div>}
             <div>
                 <b onClick={()=>setIsOpen(!isOpen)} className={s.contactsBox}>Contacts</b>: {isOpen ?<div>{Object.keys(props.profile.contacts).map(key => {
@@ -30,7 +30,7 @@ export const ProfileData = (props: ProfileDataType) => {
             })}</div>: ' '}
             </div>
             <div>
-                <b className={s.b}>About me</b>:<b className={s.word}>{props.profile.aboutMe}</b>
+                <b className={s.b}>About me</b>:<span className={s.word}>{props.profile.aboutMe}</span>
             </div>
             <div className={s.flexBoxForInput}>
                 <b className={s.b}>Status</b>:<ProfileStatusWithHooks status={props.status}
@@ -42,7 +42,7 @@ export const ProfileData = (props: ProfileDataType) => {
 
 const Contact = (props: ContactType) => {
     return <div>
-        <div className={s.contact}><b className={s.b}>{props.contactTitle}</b> : <b className={s.word}>{props.contactValue}</b> </div>
+        <div className={s.contact}><b className={s.b}>{props.contactTitle}</b> : <span className={s.word}>{props.contactValue}</span> </div>
     </div>
 }
 
