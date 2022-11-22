@@ -12,6 +12,7 @@ import {AppStateType} from "./redux/redux-store";
 import {initializedApp} from "./redux/app-reducer";
 import Preloader from "./components/Common/Preloader/Preloader";
 import {WithSuspense} from "./hoc/withSuspense";
+import {Friends} from "./components/Friends/Friends";
 
 const DialogsContainer = React.lazy(()=>import("./components/Dialogs/DialogsContainer"))
 const ProfileContainer = React.lazy(()=>import("./components/Profile/ProfileContainer"))
@@ -40,6 +41,8 @@ class App extends React.Component<AllUsersType> {
                                element={WithSuspense(ProfileContainer)}/>
                         <Route path='/profile/'
                                element={WithSuspense(ProfileContainer)}/>
+                        <Route path='/friends'
+                               element={WithSuspense(Friends)}/>
                         <Route path={'/users'}
                                element={<UsersContainer/>}/>
                         <Route path={'/login'}
