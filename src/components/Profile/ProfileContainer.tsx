@@ -55,10 +55,8 @@ export type ProfileMapStateToProps = {
     status:string
     autorizedUserId: number | null
     isAuth: boolean
-
-   // updateStatus:(status:string)=>void
-    //  isAuth: boolean
 }
+
 type MapDispatchPropsType = {
     getUserProfile: (userId: number|null) => void
     updateStatus: (status: string) => void

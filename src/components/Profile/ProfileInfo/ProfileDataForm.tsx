@@ -1,44 +1,20 @@
 import s from "./ProfileInfo.module.css";
-import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import {ProfileType} from "../ProfileContainer";
 import React from "react";
 import {Field, InjectedFormProps, reduxForm} from "redux-form";
 import {Input} from "../../Common/FormsControls/FormsControls";
 import {required} from "../../../utils/validators/validators";
-import {useDispatch, useSelector} from "react-redux";
+import {useSelector} from "react-redux";
 import {AppStateType} from "../../../redux/redux-store";
-import {editModeAC} from "../../../redux/app-reducer";
+
 
 
 const ProfileDataForm = (props: InjectedFormProps<ProfileApiType>) => {
 
     const profile = useSelector<AppStateType, ProfileApiType>(state => state.profilePage.profile)
-    const isEdit = useSelector<AppStateType, boolean>(state => state.app.isEdit)
-
-     const dispatch = useDispatch()
-
-    const HandleSubmit = () => {
-      return props.handleSubmit;
-    }
-
-    const HandleSubmit1 = () => {
-
-
-        if (props.error) {
-            return dispatch(editModeAC(true))
-        } else {
-            return dispatch(editModeAC(false))
-        }
-    }
 
     return (
-
-
-        // <form onSubmit={props.error? HandleSubmit : props.handleSubmit }>
-       // <form onSubmit={props.handleSubmit}>
         <form onSubmit={props.handleSubmit}>
-
-
             <div>
                 <button>Save</button>
             </div>
@@ -68,17 +44,12 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileApiType>) => {
                 <b className={s.b}>Contacts</b>: {Object.keys(profile.contacts).map(key => {
                 // @ts-ignore
                 return <div key={key}>
-                    <b>{key}: <Field placeholder={key} name={'contacts.' + key}
+                    <b className={s.b}>{key}: <Field placeholder={key} name={'contacts.' + key}
                                      component={Input}
                     /></b>
                 </div>
             })}
             </div>
-
-            {/*<div className={s.flexBoxForInput}>*/}
-            {/*    <b className={s.b}>Status</b>:<ProfileStatusWithHooks status={props.status}*/}
-            {/*                                                          updateStatus={props.updateStatus}/>*/}
-            {/*</div>*/}
         </form>
 
     )

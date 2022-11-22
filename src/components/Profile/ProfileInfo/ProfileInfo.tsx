@@ -5,18 +5,10 @@ import {ProfilePropsType} from "../Profile";
 import userPhoto from '../../../assets/images/user.jpg'
 import {ProfileData} from "./ProfileData";
 import {ProfileApiType, ProfileDataFormRedux, ProfileDataType} from "./ProfileDataForm";
-import {useDispatch, useSelector} from "react-redux";
-import {AppStateType} from "../../../redux/redux-store";
-import {editModeAC} from "../../../redux/app-reducer";
-
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
     let [editMode, setEditMode] = useState(false)
-
-    const isEdit = useSelector<AppStateType, boolean>(state => state.app.isEdit)
-
-    const dispatch = useDispatch()
 
     if (!props.profile) {
         return <Preloader/>
@@ -31,10 +23,6 @@ const ProfileInfo = (props: ProfilePropsType) => {
     }
 
     const onSubmit = (formData: ProfileApiType) => {
-
-       // props.saveProfile(formData)
-         // setEditMode(false)
-         // dispatch(editModeAC(false))
         props.saveProfile(formData).then(
             ()=>{
                 setEditMode(false)
@@ -55,7 +43,6 @@ const ProfileInfo = (props: ProfilePropsType) => {
                                    isOwner={props.isOwner}
                                    goToEditMode={() => {
                                        setEditMode(true)
-                                       dispatch(editModeAC(true))
                                    }}
                     />}
             </div>

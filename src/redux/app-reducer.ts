@@ -1,17 +1,17 @@
 import {Dispatch} from "redux";
-import {AuthActionTypes, getAuthUserData} from "./auth-reducer";
+import {getAuthUserData} from "./auth-reducer";
 
 
 type initialStateType = {
     initialized:boolean
-    isEdit:boolean
+
 }
 
-export type AppActionTypes = ReturnType<typeof initializedSuccess> | ReturnType<typeof editModeAC>
+export type AppActionTypes = ReturnType<typeof initializedSuccess>
 
 let initialState: initialStateType = {
    initialized:false,
-    isEdit:false
+
 }
 
 export const appReducer = (state: initialStateType = initialState, action: AppActionTypes): initialStateType => {
@@ -21,8 +21,6 @@ export const appReducer = (state: initialStateType = initialState, action: AppAc
                 ...state,
                 initialized: true
             }
-        case "EDIT_MODE":
-            return {...state, isEdit: action.isEdit};
         default:
             return state
     }
@@ -34,11 +32,6 @@ export const initializedSuccess = () => {
         type: 'INITIALIZED_SUCCESS'
     } as const
 }
-
-export const editModeAC = (isEdit: boolean) => ({
-    type: "EDIT_MODE", isEdit
-} as const)
-
 
 export const initializedApp = () => (dispatch: Dispatch<AppActionTypes | any>) => {
     let promise = dispatch ( getAuthUserData())

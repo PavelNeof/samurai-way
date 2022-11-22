@@ -51,13 +51,14 @@
 }
 
 .inputBox{
-
+    color: #172c2c;
 }
 .input{
     border-radius: 2px;
     background-color: #f2f2f2;
     min-width: 200px;
     border-bottom: #e44d3a 2px solid;
+    cursor: pointer;
 }
 .input:hover{
 background-color: lightgrey;
@@ -68,11 +69,27 @@ background-color: lightgrey;
     padding-left: 10px;
 }
 
+.contactsBox{
+    border-radius: 2px;
+    background-color: #f2f2f2;
+    min-width: 200px;
+    border-bottom: #e44d3a 2px solid;
+    color:darkslategrey;
+    cursor: pointer;
+}
+.contactsBox:hover{
+    background-color: lightgrey;
+    transition: .3s;
+}
+
 .b{
    color: darkslategrey;
 }
 
+.word{
+    color: #172c2c;
+}
+
 .error{
     color:#e44d3a;
-
 }
