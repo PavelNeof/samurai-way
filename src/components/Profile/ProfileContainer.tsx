@@ -6,7 +6,7 @@ import {getStatus, getUserProfile, savePhoto, saveProfile, updateStatus} from ".
 import {withRouter} from "../Common/withRouter/withRouter";
 
 import {compose} from "redux";
-import {ProfileDataType} from "./ProfileInfo/ProfileDataForm";
+import {ProfileApiType, ProfileDataType} from "./ProfileInfo/ProfileDataForm";
 
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
@@ -64,7 +64,7 @@ type MapDispatchPropsType = {
     updateStatus: (status: string) => void
     getStatus: (userId: number|null) => void
     savePhoto: (file:string) => void
-    saveProfile:(formData: ProfileDataType)=>void
+    saveProfile:(formData: ProfileApiType)=> Promise<number>
 }
 
 export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {

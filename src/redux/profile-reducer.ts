@@ -88,7 +88,8 @@ export const saveProfile = (profile: ProfileApiType): AppThunkType => async (dis
     let response = await profileAPI.saveProfile(profile)
     if (response.data.resultCode === 0) {
         // @ts-ignore
-        dispatch(getUserProfile(userId))
+        dispatch(getUserProfile(userId));
+        return Promise.resolve(response.data.resultCode);
     } else{
         //let message = response.data.messages.length > 0 ? response.data.messages[0] : "some Error"
        // dispatch(stopSubmit('login', {_error: message}))

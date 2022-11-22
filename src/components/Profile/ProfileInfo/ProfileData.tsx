@@ -2,12 +2,19 @@ import s from "./ProfileInfo.module.css";
 import {ProfileStatusWithHooks} from "./ProfileStatusWithHooks";
 import React from "react";
 import {ProfileDataType} from "./ProfileDataForm";
+import {useDispatch, useSelector} from "react-redux";
+import {AppStateType} from "../../../redux/redux-store";
+import {editModeAC} from "../../../redux/app-reducer";
 
 export const ProfileData = (props: ProfileDataType) => {
+
+    const editMode = useSelector<AppStateType,boolean>(state => state.app.isEdit)
+    const dispatch = useDispatch();
     return (
         <div>
             {props.isOwner && <div>
                 <button onClick={props.goToEditMode}>Edit</button>
+                {/*<button onClick={() => {dispatch(editModeAC(true))}}>Edit</button>*/}
             </div>}
             <div>
                 <b className={s.b}>Full name</b>:<b className={s.b}>{props.profile.fullName}</b>

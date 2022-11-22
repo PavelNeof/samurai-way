@@ -10,26 +10,37 @@ import {AppStateType} from "../../../redux/redux-store";
 import {editModeAC} from "../../../redux/app-reducer";
 
 
-
-const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
+const ProfileDataForm = (props: InjectedFormProps<ProfileApiType>) => {
 
     const profile = useSelector<AppStateType, ProfileApiType>(state => state.profilePage.profile)
-    const editMode = useSelector<AppStateType,boolean>(state => state.app.isEdit)
+    const isEdit = useSelector<AppStateType, boolean>(state => state.app.isEdit)
 
-    const dispatch = useDispatch()
+     const dispatch = useDispatch()
 
-    const HandleSubmit = () =>{
-      if(props.error ) {
-          dispatch(editModeAC(true))
-      }
+    const HandleSubmit = () => {
+      return props.handleSubmit;
+    }
+
+    const HandleSubmit1 = () => {
+
+
+        if (props.error) {
+            return dispatch(editModeAC(true))
+        } else {
+            return dispatch(editModeAC(false))
+        }
     }
 
     return (
-        <form onSubmit={props.error? HandleSubmit: props.handleSubmit}>
+
+
+        // <form onSubmit={props.error? HandleSubmit : props.handleSubmit }>
+       // <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit}>
 
 
             <div>
-               <button>Save</button>
+                <button>Save</button>
             </div>
             {props.error && <div className={s.error}>ERROR:{props.error}</div>}
             <div>
@@ -69,10 +80,11 @@ const ProfileDataForm = (props: InjectedFormProps<ProfileDataType>) => {
             {/*                                                          updateStatus={props.updateStatus}/>*/}
             {/*</div>*/}
         </form>
+
     )
 }
 
-export const ProfileDataFormRedux = reduxForm<ProfileDataType>({
+export const ProfileDataFormRedux = reduxForm<ProfileApiType>({
     form: 'edit-profile'
 })(ProfileDataForm)
 
