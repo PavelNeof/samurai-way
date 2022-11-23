@@ -2,6 +2,14 @@
 padding: 10px;
 }
 
+.block{
+    padding: 10px;
+}
+
+.marginBottom{
+    margin-bottom: 10px;
+}
+
 .userPhoto {
     width:100px;
     height: 100px;

@@ -9,8 +9,8 @@ type UsersType = {
     pageSize: number
     currentPage: number
     onPageChanged: (pageNumber: number) => void
-    follow: (userID: number) => void
-    unfollow: (userID: number) => void
+    follow?: (userID: number) => void
+    unfollow?: (userID: number) => void
     users: Array<initialStateUsersType>
     followingInProgress: Array<number>
 }
@@ -36,7 +36,7 @@ let Paginator = (props: UsersType) => {
             {pages
                 .filter(p=> p>= leftPortionPageNumber && p<=rightPortionPageNumber)
                 .map((p,index) => {
-                return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}
+                return <span key={index} className={props.currentPage === p ? styles.selectedPage : styles.page}
                              onClick={(e) => {
                                  props.onPageChanged(p)
                              }}>{p + ' '}</span>

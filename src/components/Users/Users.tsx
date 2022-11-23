@@ -1,10 +1,8 @@
 import React from "react";
-import {initialStateType, initialStateUsersType, toggleFollowingProgress} from "../../redux/users-reducer";
+import {initialStateUsersType} from "../../redux/users-reducer";
 import styles from "./Users.module.css"
 import userPhoto from '../../assets/images/user.jpg'
 import {NavLink} from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
 import Paginator from "../Common/Paginator/Paginator";
 
 
@@ -21,20 +19,8 @@ type UsersType = {
 
 let Users = (props: UsersType) => {
 
-    // let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
-    // let pages = [];
-    // for (let i = 1; i <= pagesCount; i++) {
-    //     pages.push(i)
-    // }
-
     return <div className={styles.container}>
         <div>
-            {/*{pages.map((p,index) => {*/}
-            {/*    return <span key={index} className={props.currentPage === p ? styles.selectedPage : ''}*/}
-            {/*                 onClick={(e) => {*/}
-            {/*                     props.onPageChanged(p)*/}
-            {/*                 }}>{p + ' '}</span>*/}
-            {/*})}*/}
             <Paginator currentPage={props.currentPage} onPageChanged={props.onPageChanged}
                        pageSize={props.pageSize}  totalUsersCount={props.totalUsersCount}
                        follow={props.follow} unfollow={props.unfollow}
@@ -43,9 +29,9 @@ let Users = (props: UsersType) => {
             />
         </div>
         {props.users.map((u: initialStateUsersType) =>
-                <span key={u.id}>
+                <div key={u.id} className={styles.marginBottom}>
             <span>
-                <div>
+                <div >
                     <NavLink to={'/profile/' + u.id}>
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                     </NavLink>
@@ -65,7 +51,7 @@ let Users = (props: UsersType) => {
                 <div> {'u.location.country'}</div>
                 <div> {'u.location.city'}</div>
             </span>
-      </span>
+      </div>
         )
 
         }

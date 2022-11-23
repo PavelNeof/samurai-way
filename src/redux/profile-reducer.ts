@@ -17,7 +17,6 @@ let initialState = {
 
 export type ProfilePageType = {
     posts: Array<PostType>
-
     profile: any
     status: string
 }

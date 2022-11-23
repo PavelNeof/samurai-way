@@ -8,10 +8,16 @@
     border: 1px solid grey;
 }
 
-.pageNumber.selectedPage {
+.selectedPage {
     font-weight: bold;
-    border-color:black;
+    color:#e44d3a;
+    cursor: pointer;
 }
+
+.page{
+    cursor: pointer;
+}
+
 
 .button{
     width: 50px;

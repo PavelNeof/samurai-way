@@ -7,6 +7,7 @@ import {AuthActionTypes, authReducer} from "./auth-reducer";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk'
 import { reducer as formReducer } from 'redux-form'
 import {AppActionTypes, appReducer} from "./app-reducer";
+import {useDispatch} from "react-redux";
 
 let reducers = combineReducers({
         profilePage: profileReducer,
@@ -21,7 +22,7 @@ let reducers = combineReducers({
 
 //export type AppStateType = ReturnType<typeof reducers>
 
-
+export const useAppDispatch = () => useDispatch<AppDispatchType>();
 export type AppStateType = ReturnType<typeof store.getState>;
 export type AppDispatchType = ThunkDispatch<AppStateType, unknown, AppActionsType>;
 export type AppThunkType<ReturnType = void> = ThunkAction<

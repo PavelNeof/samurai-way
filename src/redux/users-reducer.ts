@@ -2,7 +2,7 @@
 import {usersAPI, usersAPIType} from "../api/api";
 import {Dispatch} from "redux";
 import {AxiosResponse} from "axios";
-import {AppStateType} from "./redux-store";
+import {AppStateType, AppThunkType} from "./redux-store";
 
 export type initialStateType = {
     users: Array<initialStateUsersType>
@@ -103,11 +103,11 @@ type DispatchThunkType = {
     setTotalUsersCount: (totalUsersCount: number) => void
 }
 
-export const getUsersTC = (page: number, pageSize: number) => {
-    return (dispatch: Dispatch<UsersActionTypes> ) => {
+export const getUsersTC = (page: number, pageSize: number, friend?:boolean):AppThunkType => {
+    return (dispatch ) => {
         dispatch(toggleIsFetching(true))
         dispatch(setCurrentPage(page))
-        usersAPI.getUsers(page, pageSize).then(({data}) => {
+        usersAPI.getUsers(page, pageSize, friend).then(({data}) => {
             dispatch(toggleIsFetching(false))
             dispatch(setUsers(data.items))
             dispatch(setTotalUsersCount(data.totalCount))

@@ -16,7 +16,7 @@ type getUsersType = {
 
 
 export type usersAPIType = {
-    getUsers: (currentPage: number, pageSize: number) =>  Promise<AxiosResponse<any, any>>;
+    getUsers: (currentPage: number, pageSize: number, friend?:boolean) =>  Promise<AxiosResponse<any, any>>;
     // getUsers: any;
     unfollow: (userId: number) => Promise<AxiosResponse<void>>;
     follow: (userId: number) => Promise<AxiosResponse<any, any>>;
@@ -25,8 +25,8 @@ export type usersAPIType = {
 
 
 export const usersAPI: usersAPIType = {
-    getUsers(currentPage: number = 1, pageSize: number = 10): Promise<AxiosResponse<getUsersType>> {
-        return instance.get(`users?page=${currentPage}&count=${pageSize}`)
+    getUsers(currentPage: number = 1, pageSize: number = 10, friend?:boolean): Promise<AxiosResponse<getUsersType>> {
+        return instance.get(`users?page=${currentPage}&count=${pageSize}&friend=${friend}`)
     },
     unfollow(userId: number) {
         return instance.delete(`follow/${userId}`)
