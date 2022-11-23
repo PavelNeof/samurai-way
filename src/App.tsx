@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css'
 import Navbar from './components/Navbar/Navbar';
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import Login from "./components/Login/Login";
@@ -40,6 +40,8 @@ class App extends React.Component<AllUsersType> {
                         <Route path='/profile/:userId'
                                element={WithSuspense(ProfileContainer)}/>
                         <Route path='/profile/'
+                               element={<Navigate to={'/profile'}/>}/>
+                        <Route path='/'
                                element={WithSuspense(ProfileContainer)}/>
                         <Route path='/friends'
                                element={WithSuspense(Friends)}/>
@@ -47,6 +49,8 @@ class App extends React.Component<AllUsersType> {
                                element={<UsersContainer/>}/>
                         <Route path={'/login'}
                                element={<Login/>}/>
+                        <Route path={'/*'}
+                               element={<div>404 Not found</div>}/>
                     </Routes>
                 </div>
 

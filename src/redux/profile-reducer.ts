@@ -86,18 +86,24 @@ export const savePhoto = (file: string) => async (dispatch: Dispatch<ProfileActi
 }
 
 export const saveProfile = (profile: ProfileApiType): AppThunkType => async (dispatch, getState) => {
-   const userId = getState().auth.usersId
-    let response = await profileAPI.saveProfile(profile)
-    if (response.data.resultCode === 0) {
-        // @ts-ignore
-        dispatch(getUserProfile(userId));
-        return Promise.resolve(response.data.resultCode);
-    } else{
-        //let message = response.data.messages.length > 0 ? response.data.messages[0] : "some Error"
-       // dispatch(stopSubmit('login', {_error: message}))
-        dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
-        return Promise.reject(response.data.messages[0])
+    try{
+        const userId = getState().auth.usersId
+        let response = await profileAPI.saveProfile(profile)
+        if (response.data.resultCode === 0) {
+            // @ts-ignore
+            dispatch(getUserProfile(userId));
+            return Promise.resolve(response.data.resultCode);
+        } else{
+            //let message = response.data.messages.length > 0 ? response.data.messages[0] : "some Error"
+            // dispatch(stopSubmit('login', {_error: message}))
+            dispatch(stopSubmit('edit-profile', {_error: response.data.messages[0]}))
+            return Promise.reject(response.data.messages[0])
+        }
     }
+   catch(error:any){
+        alert(error.response.message[0])
+   }
+
 
 }
 
