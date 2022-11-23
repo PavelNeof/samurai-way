@@ -7,15 +7,16 @@ import {withRouter} from "../Common/withRouter/withRouter";
 
 import {compose} from "redux";
 import {ProfileApiType, ProfileDataType} from "./ProfileInfo/ProfileDataForm";
+import {useParams} from "react-router-dom";
 
 
 class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
-    refreshProfile(){
+    refreshProfile() {
         let userId = this.props.router.params.userId;
         if (!userId) {
             userId = this.props.autorizedUserId;
-            if(!userId){
+            if (!userId) {
                 this.props.router.navigate('/login')
             }
         }
@@ -24,12 +25,13 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
     }
 
     componentDidMount() {
+
         this.refreshProfile()
     }
 
     componentDidUpdate(prevProps: Readonly<ProfileContainerPropsType>, prevState: Readonly<{}>, snapshot?: any) {
-        if(this.props.router.params.userId  != prevProps.router.params.userId) {
-        this.refreshProfile()
+        if (this.props.router.params.userId != prevProps.router.params.userId) {
+            this.refreshProfile()
         }
     }
 
@@ -39,11 +41,13 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
             <div>
                 <Profile
                     isOwner={!this.props.router.params.userId}
-                    status ={this.props.status}
+                    status={this.props.status}
                     updateStatus={this.props.updateStatus}
                     profile={this.props.profile}
                     savePhoto={this.props.savePhoto}
                     saveProfile={this.props.saveProfile}
+                    userId={123}
+
                 />
             </div>
         )
@@ -52,17 +56,17 @@ class ProfileContainer extends React.Component<ProfileContainerPropsType> {
 
 export type ProfileMapStateToProps = {
     profile: ProfileType
-    status:string
+    status: string
     autorizedUserId: number | null
     isAuth: boolean
 }
 
 type MapDispatchPropsType = {
-    getUserProfile: (userId: number|null) => void
+    getUserProfile: (userId: number | null) => void
     updateStatus: (status: string) => void
-    getStatus: (userId: number|null) => void
-    savePhoto: (file:string) => void
-    saveProfile:(formData: ProfileApiType)=> Promise<number>
+    getStatus: (userId: number | null) => void
+    savePhoto: (file: string) => void
+    saveProfile: (formData: ProfileApiType) => Promise<number>
 }
 
 export type ProfileContainerPropsType = ProfileMapStateToProps & MapDispatchPropsType & {
@@ -88,10 +92,10 @@ export type ProfileType = {
     }
     status: string
     followed: boolean
-    fullName:string
-    lookingForAJob:boolean
-    lookingForAJobDescription:string | null
-    aboutMe:string | null
+    fullName: string
+    lookingForAJob: boolean
+    lookingForAJobDescription: string | null
+    aboutMe: string | null
     contacts: {
         facebook: null | string
         website: null | string
@@ -103,7 +107,6 @@ export type ProfileType = {
         mainLink: null | string
     }
 }
-
 
 
 //вопрос с типизацией ProfileMapStateToProps
@@ -123,7 +126,7 @@ let mapStateToProps = (state: AppStateType): ProfileMapStateToProps => ({
 //export default connect(mapStateToProps, {getUserProfile})(WithUrlDataContainerComponent);
 
 export default compose<React.ComponentType>(
-    connect(mapStateToProps, {getUserProfile,updateStatus,getStatus,savePhoto,saveProfile}),
+    connect(mapStateToProps, {getUserProfile, updateStatus, getStatus, savePhoto, saveProfile}),
     withRouter,
-   // withAuthRedirect
+    // withAuthRedirect
 )(ProfileContainer)

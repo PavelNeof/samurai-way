@@ -5,6 +5,7 @@ import {ProfilePropsType} from "../Profile";
 import userPhoto from '../../../assets/images/user.jpg'
 import {ProfileData} from "./ProfileData";
 import {ProfileApiType, ProfileDataFormRedux, ProfileDataType} from "./ProfileDataForm";
+import {useParams} from "react-router-dom";
 
 const ProfileInfo = (props: ProfilePropsType) => {
 
@@ -24,7 +25,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
 
     const onSubmit = (formData: ProfileApiType) => {
         props.saveProfile(formData).then(
-            ()=>{
+            () => {
                 setEditMode(false)
             }
         )
@@ -40,7 +41,7 @@ const ProfileInfo = (props: ProfilePropsType) => {
                 {editMode
                     ? <ProfileDataFormRedux initialValues={props.profile} onSubmit={onSubmit}/>
                     : <ProfileData profile={props.profile} updateStatus={props.updateStatus} status={props.status}
-                                   isOwner={props.isOwner}
+                                   isOwner={props.isOwner} userId={props.userId}
                                    goToEditMode={() => {
                                        setEditMode(true)
                                    }}

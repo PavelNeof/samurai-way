@@ -76,6 +76,7 @@ export type ProfileDataType = {
     status: string
     updateStatus: (status: string) => void
     isOwner: boolean
+    userId:number | null
     goToEditMode: () => void
 }
 
