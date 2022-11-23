@@ -13,12 +13,15 @@ let initialState = {
     ],
     profile: null,
     status: ''
+
+
 }
 
 export type ProfilePageType = {
     posts: Array<PostType>
     profile: any
     status: string
+
 }
 export type PostType = {
     id: number

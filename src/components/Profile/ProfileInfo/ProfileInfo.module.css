@@ -71,14 +71,15 @@ background-color: lightgrey;
 
 .contactsBox{
     border-radius: 2px;
-    background-color: #f2f2f2;
+    background-color: lightgrey;
     min-width: 200px;
     border-bottom: #e44d3a 2px solid;
     color:darkslategrey;
     cursor: pointer;
+
 }
 .contactsBox:hover{
-    background-color: lightgrey;
+    background-color: #a2a2a2;
     transition: .3s;
 }
 

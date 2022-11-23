@@ -1,5 +1,7 @@
 import React from 'react';
 import s from './Post.module.css';
+import {useSelector} from "react-redux";
+import {AppStateType} from "../../../../redux/redux-store";
 
 export type PostPropsType ={
     message:string
@@ -7,9 +9,14 @@ export type PostPropsType ={
 }
 
 const Post = (props:PostPropsType) => {
+
+   const photos = useSelector<AppStateType, string | undefined>(state=>state.profilePage.profile?.photos?.small)
+
     return (
         <div className={s.item}>
-            <img src='https://www.meme-arsenal.com/memes/597761efc057a2df1bc14b76e12c4330.jpg' />
+
+            {photos ? <img src={photos} /> : 'Loading photo... ' }
+
             { props.message }
             <div>
                 <span>like</span> { props.likesCount }

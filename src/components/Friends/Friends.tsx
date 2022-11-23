@@ -47,12 +47,6 @@ export const Friends = () => {
                         <img src={u.photos.small != null ? u.photos.small : userPhoto} className={styles.userPhoto}/>
                     </NavLink>
                 </div>
-                <div>
-{/*{u.followed*/}
-                    {/*    ? <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => props.unfollow(u.id)} className={styles.unfollow}> Unfollow </button>*/}
-                    {/*    : <button disabled={props.followingInProgress.some(id => id === u.id)} onClick={() => {props.follow(u.id)}} className={styles.follow}> Follow </button>*/}
-                    {/*}*/}
-</div>
                 </span>
                         <span>
                 <div>{u.name}</div>
