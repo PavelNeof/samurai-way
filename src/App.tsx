@@ -14,8 +14,8 @@ import Preloader from "./components/Common/Preloader/Preloader";
 import {WithSuspense} from "./hoc/withSuspense";
 import {Friends} from "./components/Friends/Friends";
 
-const DialogsContainer = React.lazy(()=>import("./components/Dialogs/DialogsContainer"))
-const ProfileContainer = React.lazy(()=>import("./components/Profile/ProfileContainer"))
+const DialogsContainer = React.lazy(() => import("./components/Dialogs/DialogsContainer"))
+const ProfileContainer = React.lazy(() => import("./components/Profile/ProfileContainer"))
 
 class App extends React.Component<AllUsersType> {
 
@@ -24,7 +24,7 @@ class App extends React.Component<AllUsersType> {
     }
 
     render() {
-        if(!this.props.initialized){
+        if (!this.props.initialized) {
             return <Preloader/>
         }
         return (
@@ -40,9 +40,9 @@ class App extends React.Component<AllUsersType> {
                         <Route path='/profile/:userId'
                                element={WithSuspense(ProfileContainer)}/>
                         <Route path='/profile/'
-                               element={<Navigate to={'/profile'}/>}/>
-                        <Route path='/'
                                element={WithSuspense(ProfileContainer)}/>
+                        <Route path='/'
+                               element={<Navigate to={'/profile'}/>}/>
                         <Route path='/friends'
                                element={WithSuspense(Friends)}/>
                         <Route path={'/users'}
@@ -66,7 +66,7 @@ type mapDispatchToPropsType = {
 }
 
 type mapStateToPropsType = {
-    initialized:boolean
+    initialized: boolean
 }
 const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
     initialized: state.app.initialized
@@ -74,4 +74,4 @@ const mapStateToProps = (state: AppStateType): mapStateToPropsType => ({
 
 export default compose<React.ComponentType>(
     withRouter,
-    connect(mapStateToProps,{initializedApp})) (App);
+    connect(mapStateToProps, {initializedApp}))(App);
