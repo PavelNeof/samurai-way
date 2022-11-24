@@ -43,6 +43,8 @@ class App extends React.Component<AllUsersType> {
                                element={WithSuspense(ProfileContainer)}/>
                         <Route path='/'
                                element={<Navigate to={'/profile'}/>}/>
+                        <Route path='/samurai-way/'
+                               element={<Navigate to={'/profile'}/>}/>
                         <Route path='/friends'
                                element={WithSuspense(Friends)}/>
                         <Route path={'/users'}
